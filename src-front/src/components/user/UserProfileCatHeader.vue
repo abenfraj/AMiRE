@@ -1,15 +1,15 @@
 
 <template>
     <form @submit="handleSubmit" :class="{box: isEdit}">
-        <div class="is-flex is-justify-content-flex-end gap-4">
+        <div class="block is-flex is-justify-content-flex-end gap-4">
             <button v-if="isEdit" class="button is-primary" type="submit">Sauvegarder</button>
             <template v-else>
                 <button class="button is-primary" @click="handleEditBtn">Modifier les infos de contact</button>
-                <button class="button is-danger" @click="handleDisconnect">Se déconnecter</button>
+                <a href="/logout" class="button is-danger">Se déconnecter</a>
             </template>
         </div>
 
-        <div class="has-text-centered">
+        <div class="has-text-centered block" >
             <p class="title is-1">
                 <EditableText v-model="enseignant.prenomEnseignant" :isEdit="isEdit" style="margin-right: 0.5ch;" placeholder="Prénom" required></EditableText>
                 <EditableText v-model="enseignant.nomEnseignant" :isEdit="isEdit" placeholder="Nom" required></EditableText>
@@ -41,9 +41,7 @@ const props = defineProps<{
 
 const enseignant = reactive<EnseignantEntity>(props.profile);
 const isEdit = ref<boolean>(false);
-function handleDisconnect() {
-    console.log("Disconnect");
-}
+
 function handleSubmit(e: Event) {
     e.preventDefault();
     emits("triggerPatch");

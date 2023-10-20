@@ -4,6 +4,7 @@ import type { EnseignantEntity } from '@/lib/api/entities';
 import { ref } from 'vue';
 import UserProfileCatHeader from './UserProfileCatHeader.vue';
 import UserProfileCatSearch from './UserProfileCatSearch.vue';
+import UserProfileCatExperience from './UserProfileCatExperience.vue';
 
 const profile = ref<EnseignantEntity|null>(null);
 const isLoading = ref<boolean>(false);
@@ -21,14 +22,10 @@ getProfile();
 </script>
 
 <template>
-    <div :class="{loading: isLoading}">
-        <p v-if="profile">
-            {{ profile }}
-            <hr/>
-            <UserProfileCatHeader :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatHeader>
-            <UserProfileCatSearch :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatSearch>
-        </p>
-        <p v-else>Loading...</p>
+    <div :class="{loading: isLoading}" v-if="profile">
+        <UserProfileCatHeader :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatHeader>
+        <UserProfileCatSearch :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatSearch>
+        <UserProfileCatExperience :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatExperience>
     </div>
 </template>
 <style scoped>
