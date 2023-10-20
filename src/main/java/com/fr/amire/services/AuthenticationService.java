@@ -15,4 +15,8 @@ public class AuthenticationService {
         AccountEntity account = accountSessionBean.findByUsername(username);
         return account != null && account.getPassword().equals(password);
     }
+
+    public AccountEntity getAccount(String username) {
+        return accountSessionBean.findByUsername(username);
+    }
 }

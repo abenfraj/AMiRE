@@ -1,14 +1,12 @@
 package com.fr.amire.servlets;
 
+import com.fr.amire.entities.AccountEntity;
 import com.fr.amire.services.AuthenticationService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
@@ -23,8 +21,18 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         if (authenticationService.authenticate(username, password)) {
+            AccountEntity account = authenticationService.getAccount(username);
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
+
+            Cookie idCookie = new Cookie("userId", String.valueOf(account.getId()));
+            Cookie typeCookie = new Cookie("userType", account.getType());
+
+            idCookie.setMaxAge(60 * 60 * 24);  // 1 day
+            typeCookie.setMaxAge(60 * 60 * 24);  // 1 day
+
+            response.addCookie(idCookie);
+            response.addCookie(typeCookie);
             response.sendRedirect("home.jsp");
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");

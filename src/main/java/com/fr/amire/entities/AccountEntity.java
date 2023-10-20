@@ -15,6 +15,9 @@ public class AccountEntity {
     @Basic
     @Column(name = "password", nullable = true, length = 50)
     private String password;
+    @Basic
+    @Column(name = "type", nullable = true, length = 10)
+    private String type;
 
     public int getId() {
         return id;
@@ -60,5 +63,13 @@ public class AccountEntity {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
