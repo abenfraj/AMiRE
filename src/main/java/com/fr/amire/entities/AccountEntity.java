@@ -8,25 +8,36 @@ public class AccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int idUser;
+    private int id;
     @Basic
-    @Column(name = "name", nullable = true, length = 256)
-    private String name;
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
+    @Basic
+    @Column(name = "password", nullable = true, length = 50)
+    private String password;
 
-    public int getIdUser() {
-        return idUser;
+    public int getId() {
+        return id;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -36,16 +47,18 @@ public class AccountEntity {
 
         AccountEntity that = (AccountEntity) o;
 
-        if (idUser != that.idUser) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (id != that.id) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idUser;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 }

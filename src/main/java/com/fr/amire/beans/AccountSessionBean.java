@@ -1,10 +1,9 @@
-package com.fr.amire;
+package com.fr.amire.beans;
 
 import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,5 +18,16 @@ public class AccountSessionBean {
     public List<AccountEntity> getAll() {
         Query q = em.createQuery("select e from AccountEntity e");
         return q.getResultList();
+    }
+
+    public AccountEntity findByUsername(String username) {
+        try {
+            return em.createQuery("SELECT a FROM AccountEntity a WHERE a.username = :username", AccountEntity.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            LOGGER.warning("No result found for username: " + username);
+            return null;
+        }
     }
 }
