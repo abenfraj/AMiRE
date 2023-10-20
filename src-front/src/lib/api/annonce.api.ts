@@ -1,6 +1,7 @@
 import { EcoleApi } from "./ecole.api";
 import { EnseignantApi } from "./enseignant.api";
 import type { AnnonceEntity, CandidatureEntity } from "./entities";
+import { __tmpAnnonces, __tmpCandidatures, __tmpStores, __tmpTeacher } from "./tmpMemoryDB";
 
 
 export class AnnonceApi {
@@ -10,12 +11,12 @@ export class AnnonceApi {
      * POST /annonce/
      */
     public static async createAnnonce(annonce: Omit<AnnonceEntity, "idCandidature"|"idEcole">): Promise<AnnonceEntity[]> {
-        AnnonceApi.__tmpAnnonces.push({
+        __tmpAnnonces.push({
             ...annonce,
-            id: AnnonceApi.__tmpAnnonces.length + 1 ,
-            idEcole: EcoleApi.__tmpEcoleId
+            id: __tmpAnnonces.length + 1 ,
+            idEcole: __tmpStores.ecoleId
         });
-        return AnnonceApi.__tmpAnnonces;
+        return __tmpAnnonces;
     }
 
     /**
@@ -24,7 +25,7 @@ export class AnnonceApi {
      * GET /annonce/
      */
     public static async getAnnonces(): Promise<AnnonceEntity[]> {
-        return AnnonceApi.__tmpAnnonces.filter((a) => a.idEcole === EcoleApi.__tmpEcoleId);
+        return __tmpAnnonces.filter((a) => a.idEcole === __tmpStores.ecoleId);
     }
 
     /**
@@ -33,7 +34,7 @@ export class AnnonceApi {
      * @param query 
      */
     public async searchAnnonce(query: string): Promise<AnnonceEntity[]> {
-        return AnnonceApi.__tmpAnnonces.filter(
+        return __tmpAnnonces.filter(
             (a) => 
                 a.titre.includes(query)
                 || a.description.includes(query)
@@ -47,19 +48,19 @@ export class AnnonceApi {
      * @param offerId 
      */
     public static async createCandidature(offerId: number): Promise<void> {
-        const annonce = AnnonceApi.__tmpAnnonces.find((a) => a.id === offerId);
+        const annonce = __tmpAnnonces.find((a) => a.id === offerId);
         if (!annonce) {
             throw new Error("404 Annonce (offerId) not found");
         }
-        this.__tmpCandidatures.push({
-            idCandidature: AnnonceApi.__tmpCandidatures.length + 1,
+        __tmpCandidatures.push({
+            idCandidature: __tmpCandidatures.length + 1,
             dateCandidature: new Date().toISOString(),
             contacteParPersonne: "N/A",
             contacteLe: "N/A",
             decision: "En attente",
-            idEnseignant: EnseignantApi.__tmpTeacher.idEnseignant,
+            idEnseignant: __tmpTeacher.idEnseignant,
             annonce,
-            enseignant: EnseignantApi.__tmpTeacher
+            enseignant: __tmpTeacher
         });
     }
 
@@ -69,7 +70,7 @@ export class AnnonceApi {
      * GET /annonce/:offerId/candidature/
      */
     public static async getCandidaturesOfOffer(offerId: number): Promise<CandidatureEntity[]> {
-        return this.__tmpCandidatures.filter((c) => c.annonce?.id === offerId);
+        return __tmpCandidatures.filter((c) => c.annonce?.id === offerId);
     }
 
     /**
@@ -78,37 +79,12 @@ export class AnnonceApi {
      * PATCH /candidature/:candidatureId
      */
     public static async saveCandidature(candidature: Partial<CandidatureEntity>): Promise<CandidatureEntity> {
-        const index = this.__tmpCandidatures.findIndex((c) => c.idCandidature === candidature.idCandidature);
+        const index = __tmpCandidatures.findIndex((c) => c.idCandidature === candidature.idCandidature);
         if (index < 0) {
             throw new Error("404 Candidature (id) not found");
         }
-        this.__tmpCandidatures[index] = {...this.__tmpCandidatures[index], ...candidature};
-        return this.__tmpCandidatures[index];
+        __tmpCandidatures[index] = {...__tmpCandidatures[index], ...candidature};
+        return __tmpCandidatures[index];
     }
-
-    static __tmpAnnonces: AnnonceEntity[] = [
-        {
-            id: 1,
-            titre: "Professeur d'informatique",
-            niveauxSouhaites: "L1,M1,M2",
-            typeDeContrat: "CDI",
-            description: "Nous recherchons un professeur d'informatique pour enseigner à nos étudiants",
-            idEcole: 1,
-            expirationAnnonce: "2024-06-30"
-        }
-    ];
-
-    static __tmpCandidatures: CandidatureEntity[] = [
-        {
-            idCandidature: 1,
-            dateCandidature: "2021-06-01",
-            contacteParPersonne: "John Doe",
-            contacteLe: "2021-06-15",
-            decision: "En attente",
-            idEnseignant: 1,
-            enseignant: EnseignantApi.__tmpTeacher,
-            annonce: AnnonceApi.__tmpAnnonces[0]
-        }
-    ];
 
 }

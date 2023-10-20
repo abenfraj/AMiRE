@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import UserProfileContainerVue from '@/components/user/UserProfileContainer.vue';
+
 </script>
 
 <template>
-  <main>
-    Hello World
+  <main class="container">
+    <UserProfileContainerVue></UserProfileContainerVue>
   </main>
 </template>

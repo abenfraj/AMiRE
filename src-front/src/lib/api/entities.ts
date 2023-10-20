@@ -41,7 +41,7 @@ export type EnseignantEntity = {
     evaluation: string,
 };
 
-export type Ecole {
+export type EcoleEntity = {
     idEcole: number;
     raisonSociale: string;
     competences: string;
