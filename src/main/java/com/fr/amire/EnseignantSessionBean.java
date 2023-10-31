@@ -1,9 +1,12 @@
 package com.fr.amire;
 
+import com.fr.amire.entities.AccountEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 public class EnseignantSessionBean {
@@ -12,4 +15,8 @@ public class EnseignantSessionBean {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
+    public List<AccountEntity> getAllEnseignants() {
+        Query q = em.createQuery("select enseignants from AnnonceEntity enseignants");
+        return q.getResultList();
+    }
 }

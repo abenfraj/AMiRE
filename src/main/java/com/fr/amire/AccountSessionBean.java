@@ -4,7 +4,6 @@ import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -16,7 +15,7 @@ public class AccountSessionBean {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<AccountEntity> getAll() {
+    public List<AccountEntity> getAllAccounts() {
         Query q = em.createQuery("select e from AccountEntity e");
         return q.getResultList();
     }
