@@ -25,19 +25,24 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
 
-            Cookie idCookie = new Cookie("userId", String.valueOf(account.getId()));
-            Cookie typeCookie = new Cookie("userType", account.getType());
+            addCookiesToResponse(response, account);
 
-            idCookie.setMaxAge(60 * 60 * 24);  // 1 day
-            typeCookie.setMaxAge(60 * 60 * 24);  // 1 day
-
-            response.addCookie(idCookie);
-            response.addCookie(typeCookie);
             response.sendRedirect("home.jsp");
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         }
+    }
+
+    private void addCookiesToResponse(HttpServletResponse response, AccountEntity account) {
+        Cookie idCookie = new Cookie("userId", String.valueOf(account.getId()));
+        Cookie typeCookie = new Cookie("userType", account.getType());
+
+        idCookie.setMaxAge(60 * 60 * 24);  // 1 day
+        typeCookie.setMaxAge(60 * 60 * 24);  // 1 day
+
+        response.addCookie(idCookie);
+        response.addCookie(typeCookie);
     }
 }

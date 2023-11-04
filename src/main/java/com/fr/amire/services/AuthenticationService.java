@@ -1,6 +1,6 @@
 package com.fr.amire.services;
 
-import com.fr.amire.beans.AccountSessionBean;
+import com.fr.amire.repositories.AccountRepository;
 import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -9,14 +9,14 @@ import jakarta.ejb.Stateless;
 public class AuthenticationService {
 
     @EJB
-    private AccountSessionBean accountSessionBean;
+    private AccountRepository accountRepository;
 
     public boolean authenticate(String username, String password) {
-        AccountEntity account = accountSessionBean.findByUsername(username);
+        AccountEntity account = accountRepository.findByUsername(username);
         return account != null && account.getPassword().equals(password);
     }
 
     public AccountEntity getAccount(String username) {
-        return accountSessionBean.findByUsername(username);
+        return accountRepository.findByUsername(username);
     }
 }
