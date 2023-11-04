@@ -1,7 +1,7 @@
 package com.fr.amire.repositories;
 
-import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
+import com.fr.amire.entities.CandidatureEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -17,8 +17,25 @@ public class CandidatureRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<AccountEntity> getAllCandidatures() {
+    public List<CandidatureEntity> getAllCandidatures() {
         Query q = em.createQuery("select candidatures from AnnonceEntity candidatures");
         return q.getResultList();
+    }
+
+    public CandidatureEntity getCandidatureByOfferId(int idCandidature) {
+        try {
+            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idCandidature = :idCandidature", CandidatureEntity.class)
+                    .setParameter("idCandidature", idCandidature)
+                    .getSingleResult();
+        } catch (Exception e) {
+            LOGGER.warning("No result found for offerId: " + idCandidature);
+            return null;
+        }
+    }
+
+    public void save(CandidatureEntity candidature) {
+        em.getTransaction().begin();
+        em.persist(candidature);
+        em.getTransaction().commit();
     }
 }

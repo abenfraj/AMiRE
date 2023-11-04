@@ -1,6 +1,7 @@
 package com.fr.amire.repositories;
 
 import com.fr.amire.entities.AccountEntity;
+import com.fr.amire.entities.AnnonceEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,7 +18,7 @@ public class AnnonceRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<AccountEntity> getAllAnnonces() {
+    public List<AnnonceEntity> getAllAnnonces() {
         Query q = em.createQuery("select annonces from AnnonceEntity annonces");
         return q.getResultList();
     }
