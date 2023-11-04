@@ -7,6 +7,10 @@
 
 
       <class>com.fr.amire.entities.AccountEntity</class>
+      <class>com.fr.amire.entities.AnnonceEntity</class>
+      <class>com.fr.amire.entities.CandidatureEntity</class>
+      <class>com.fr.amire.entities.EcoleEntity</class>
+      <class>com.fr.amire.entities.EnseignantEntity</class>
       <properties>
           <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/amire"/>
           <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
