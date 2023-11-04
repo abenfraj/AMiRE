@@ -1,4 +1,4 @@
-package com.fr.amire.servlets;
+package com.fr.amire.servlets.annonce;
 
 import com.fr.amire.entities.AnnonceEntity;
 import com.fr.amire.services.AnnonceService;
@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/annonce")
@@ -19,7 +18,8 @@ public class AnnonceServlet extends HttpServlet {
     public void init() {
         this.annonceService = new AnnonceService();
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<AnnonceEntity> annonces = annonceService.getAllAnnonces();
 
         String jsonResponse = convertListToJson(annonces);

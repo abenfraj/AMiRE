@@ -1,6 +1,7 @@
 package com.fr.amire.repositories;
 
 import com.fr.amire.entities.AccountEntity;
+import com.fr.amire.entities.EcoleEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,8 +18,8 @@ public class EcoleRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<AccountEntity> getAllEcoles() {
-        Query q = em.createQuery("select ecoles from AnnonceEntity ecoles");
+    public List<EcoleEntity> getAllEcoles() {
+        Query q = em.createQuery("select ecoles from EcoleEntity ecoles");
         return q.getResultList();
     }
 }

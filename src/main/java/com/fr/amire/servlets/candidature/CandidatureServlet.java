@@ -1,4 +1,4 @@
-package com.fr.amire.servlets;
+package com.fr.amire.servlets.candidature;
 
 import com.fr.amire.entities.CandidatureEntity;
 import com.fr.amire.services.CandidatureService;
