@@ -1,7 +1,7 @@
-package com.fr.amire.servlets.ecole;
+package com.fr.amire.servlets.enseignant;
 
-import com.fr.amire.entities.EcoleEntity;
-import com.fr.amire.services.EcoleService;
+import com.fr.amire.entities.EnseignantEntity;
+import com.fr.amire.services.EnseignantService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,19 +11,19 @@ import utils.ConvertClass;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/ecole")
-public class EcoleServlet extends HttpServlet {
+@WebServlet("/enseignant")
+public class EnseignantServlet extends HttpServlet {
 
-    private EcoleService ecoleService;
+    private EnseignantService enseignantService;
 
     public void init() {
-        this.ecoleService = new EcoleService();
+        this.enseignantService = new EnseignantService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<EcoleEntity> ecoles = ecoleService.getAllEcoles();
+        List<EnseignantEntity> enseignants = enseignantService.getAllEnseigannts();
 
-        String jsonResponse = ConvertClass.convertEcoleListToJson(ecoles);
+        String jsonResponse = ConvertClass.convertEnseignantListToJson(enseignants);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

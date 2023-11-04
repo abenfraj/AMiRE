@@ -1,6 +1,5 @@
 package com.fr.amire.repositories;
 
-import com.fr.amire.entities.AccountEntity;
 import com.fr.amire.entities.EcoleEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -27,5 +26,11 @@ public class EcoleRepository {
         Query q = em.createQuery("select ecoles from EcoleEntity ecoles where ecoles.idEcole = :id");
         q.setParameter("id", id);
         return (EcoleEntity) q.getSingleResult();
+    }
+
+    public void save(EcoleEntity ecole) {
+        em.getTransaction().begin();
+        em.persist(ecole);
+        em.getTransaction().commit();
     }
 }

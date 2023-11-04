@@ -6,9 +6,7 @@ import com.fr.amire.repositories.CandidatureRepository;
 import jakarta.ejb.EJB;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 public class CandidatureService {

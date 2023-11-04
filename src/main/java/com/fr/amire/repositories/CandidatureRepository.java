@@ -1,7 +1,7 @@
 package com.fr.amire.repositories;
 
-import jakarta.ejb.Stateless;
 import com.fr.amire.entities.CandidatureEntity;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

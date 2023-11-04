@@ -21,4 +21,13 @@ public class EcoleService {
     public EcoleEntity getEcoleById(int id) {
         return ecoleRepository.getEcoleById(id);
     }
+
+    public boolean saveEcole(EcoleEntity ecole) {
+        try {
+            ecoleRepository.save(ecole);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
