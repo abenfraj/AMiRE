@@ -1,4 +1,4 @@
-package com.fr.amire.repository;
+package com.fr.amire.repositories;
 
 import com.fr.amire.entities.AccountEntity;
 import jakarta.persistence.EntityManager;
