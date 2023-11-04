@@ -17,4 +17,8 @@ public class EcoleService {
     public List<EcoleEntity> getAllEcoles() {
         return ecoleRepository.getAllEcoles();
     }
+
+    public EcoleEntity getEcoleById(int id) {
+        return ecoleRepository.getEcoleById(id);
+    }
 }
