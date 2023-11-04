@@ -22,4 +22,15 @@ public class AnnonceRepository {
         Query q = em.createQuery("select annonces from AnnonceEntity annonces");
         return q.getResultList();
     }
+
+    public List<AnnonceEntity> searchAnnonces(String searchQuery) {
+        try {
+            return em.createQuery("SELECT a FROM AnnonceEntity a WHERE a.titre LIKE :searchQuery OR a.description LIKE :searchQuery", AnnonceEntity.class)
+                    .setParameter("searchQuery", "%" + searchQuery + "%")
+                    .getResultList();
+        } catch (Exception e) {
+            LOGGER.warning("No result found for searchQuery: " + searchQuery);
+            return null;
+        }
+    }
 }
