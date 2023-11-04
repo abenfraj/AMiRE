@@ -1,4 +1,4 @@
-package com.fr.amire;
+package com.fr.amire.repository;
 
 import com.fr.amire.entities.AccountEntity;
 import jakarta.persistence.EntityManager;
@@ -9,8 +9,8 @@ import jakarta.persistence.Query;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class CandidatureSessionBean {
-    private static final Logger LOGGER = Logger.getLogger(CandidatureSessionBean.class.getName());
+public class CandidatureRepository {
+    private static final Logger LOGGER = Logger.getLogger(CandidatureRepository.class.getName());
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();

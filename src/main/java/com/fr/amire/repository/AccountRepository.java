@@ -1,4 +1,4 @@
-package com.fr.amire;
+package com.fr.amire.repository;
 
 import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
-public class AccountSessionBean {
+public class AccountRepository {
 
-    private static final Logger LOGGER = Logger.getLogger(AccountSessionBean.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AccountRepository.class.getName());
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
