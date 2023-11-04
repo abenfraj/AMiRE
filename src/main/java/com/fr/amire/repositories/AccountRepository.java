@@ -1,4 +1,4 @@
-package com.fr.amire.repository;
+package com.fr.amire.repositories;
 
 import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
@@ -15,8 +15,19 @@ public class AccountRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<AccountEntity> getAllAccounts() {
+    public List<AccountEntity> getAll() {
         Query q = em.createQuery("select e from AccountEntity e");
         return q.getResultList();
+    }
+
+    public AccountEntity findByUsername(String username) {
+        try {
+            return em.createQuery("SELECT a FROM AccountEntity a WHERE a.username = :username", AccountEntity.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            LOGGER.warning("No result found for username: " + username);
+            return null;
+        }
     }
 }
