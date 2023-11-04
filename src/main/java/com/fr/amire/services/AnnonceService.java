@@ -18,4 +18,8 @@ public class AnnonceService {
     public List<AnnonceEntity> getAllAnnonces() {
         return annonceRepository.getAllAnnonces();
     }
+
+    public List<AnnonceEntity> searchAnnonces(String searchQuery) {
+        return annonceRepository.searchAnnonces(searchQuery);
+    }
 }
