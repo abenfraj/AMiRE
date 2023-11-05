@@ -20,18 +20,18 @@ const props = defineProps<{
 }>();
 const listeEcoles = ref<EcoleEntity[] | null>();
 
-async function handleFetchAnnonces() {
+async function handleFetchEcole() {
   listeEcoles.value = null;
   listeEcoles.value = await EcoleApi.getEcoles();
 }
 
-onMounted(handleFetchAnnonces);
+onMounted(handleFetchEcole);
 
 watch(
   () => props.modalCreationState,
   (newValue, oldValue) => {
     if (newValue == false && oldValue == true) {
-      handleFetchAnnonces();
+      handleFetchEcole();
     }
   },
 );

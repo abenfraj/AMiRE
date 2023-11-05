@@ -12,7 +12,7 @@
       -->
     <p class="ecoleDescription">{{ props.ecole.besoins }}</p>
     <div class="buttons is-justify-content-end">
-      <button class="button no-border has-text-danger">
+      <button class="button no-border has-text-danger is-small">
         Supprimer l'école
       </button>
     </div>

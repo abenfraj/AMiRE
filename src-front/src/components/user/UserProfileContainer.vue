@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ loading: isLoading }" v-if="profile">
+  <div v-if="profile">
     <UserProfileCatHeader
       :profile="profile"
       @trigger-patch="patchProfile(profile)"
@@ -13,6 +13,7 @@
       @trigger-patch="patchProfile(profile)"
     ></UserProfileCatExperience>
   </div>
+  <LoadingSpinner v-if="!profile || isLoading"/>
 </template>
 <script setup lang="ts">
 import { EnseignantApi } from "@/lib/api/enseignant.api";
@@ -21,6 +22,7 @@ import { ref } from "vue";
 import UserProfileCatHeader from "./UserProfileCatHeader.vue";
 import UserProfileCatSearch from "./UserProfileCatSearch.vue";
 import UserProfileCatExperience from "./UserProfileCatExperience.vue";
+import LoadingSpinner from "../utils/LoadingSpinner.vue";
 
 const profile = ref<EnseignantEntity | null>(null);
 const isLoading = ref<boolean>(false);

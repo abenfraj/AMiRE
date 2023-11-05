@@ -10,8 +10,8 @@
     </div>
     <p class="annonceDescription">{{ props.annonce.description }}</p>
     <div class="buttons is-justify-content-end">
-      <button class="button no-border">Détails de l'annonce</button>
-      <button class="button is-primary">Liste des candidatures</button>
+      <button class="button no-border is-small">Détails de l'annonce</button>
+      <button class="button is-primary is-small">Liste des candidatures</button>
     </div>
     <hr />
   </div>

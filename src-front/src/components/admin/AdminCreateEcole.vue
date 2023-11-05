@@ -68,8 +68,6 @@
         ></textarea>
       </div>
     </div>
-
-    {{ ecoleToSend }}
   </Modal>
 </template>
 

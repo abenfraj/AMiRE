@@ -18,7 +18,7 @@ export class AnnonceApi {
   public static async createAnnonce(
     annonce: Omit<
       AnnonceEntity,
-      "idCandidature" | "idEcole" | "nbCandidatures"
+      "id" | "idEcole" | "nbCandidatures"
     >,
   ): Promise<AnnonceEntity[]> {
     __tmpAnnonces.push({
