@@ -1,3 +1,10 @@
+<template>
+    <div :class="{loading: isLoading}" v-if="profile">
+        <UserProfileCatHeader :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatHeader>
+        <UserProfileCatSearch :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatSearch>
+        <UserProfileCatExperience :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatExperience>
+    </div>
+</template>
 <script setup lang="ts">
 import { EnseignantApi } from '@/lib/api/enseignant.api';
 import type { EnseignantEntity } from '@/lib/api/entities';
@@ -20,14 +27,6 @@ const patchProfile = async (newProfile: Partial<EnseignantEntity>) => {
 
 getProfile();
 </script>
-
-<template>
-    <div :class="{loading: isLoading}" v-if="profile">
-        <UserProfileCatHeader :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatHeader>
-        <UserProfileCatSearch :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatSearch>
-        <UserProfileCatExperience :profile="profile" @trigger-patch="patchProfile(profile)"></UserProfileCatExperience>
-    </div>
-</template>
 <style scoped>
 .loading {
     opacity: 0.5;

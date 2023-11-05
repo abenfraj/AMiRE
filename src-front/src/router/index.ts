@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import DashboardView from '../views/DashboardView.vue';
+import CandidaturesPageVue from '@/views/CandidaturesPage.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -10,9 +11,9 @@ const router = createRouter({
       component: DashboardView,
     },
     {
-      path: '/',
-      name: 'dashboard',
-      component: DashboardView,
+      path: '/candidatures',
+      name: 'candidatures',
+      component: CandidaturesPageVue,
     },
   ]
 })
