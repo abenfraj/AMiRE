@@ -6,6 +6,7 @@ import {
   __tmpCandidatures,
   __tmpStores,
   __tmpTeacher,
+  tmpPause,
 } from "./tmpMemoryDB";
 
 export class AnnonceApi {
@@ -31,6 +32,7 @@ export class AnnonceApi {
    * GET /annonce/
    */
   public static async getAnnonces(): Promise<AnnonceEntity[]> {
+    await tmpPause();
     return __tmpAnnonces.filter((a) => a.idEcole === __tmpStores.ecoleId);
   }
 

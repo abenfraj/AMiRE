@@ -14,8 +14,8 @@
 </template>
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import type { IconName } from "./Icon.vue";
-import Icon from "./Icon.vue";
+import type { IconName } from "../utils/Icon.vue";
+import Icon from "../utils/Icon.vue";
 
 const props = defineProps<{
   icon: IconName;
