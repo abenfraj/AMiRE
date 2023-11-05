@@ -1,0 +1,40 @@
+<template>
+  <div class="modal" :class="{ 'is-active': props.isActive }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">{{ props.title }}</p>
+        <button class="delete" aria-label="close" @click="handleClose"></button>
+      </header>
+      <section class="modal-card-body">
+        <slot></slot>
+      </section>
+      <footer class="modal-card-foot is-justify-content-end">
+        <button class="button" @click="handleClose">Annuler</button>
+        <button
+          class="button is-success"
+          @click="handleSave"
+          :disabled="props.isLoading"
+        >
+          {{ props.isLoading ? "Sauvegarde en cours..." : "Enregistrer" }}
+        </button>
+      </footer>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+const props = defineProps<{
+  title: string;
+  isLoading?: boolean;
+  isActive: boolean;
+}>();
+const emits = defineEmits(["close", "save"]);
+const handleClose = (e) => {
+  e.preventDefault();
+  emits("close");
+};
+const handleSave = (e) => {
+  e.preventDefault();
+  emits("save");
+};
+</script>

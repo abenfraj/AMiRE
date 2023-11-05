@@ -1,5 +1,11 @@
 <template>
-  <img v-if="icon" :src="icon.src" :alt="icon.alt" :width="props.width" :height="props.height"/>
+  <img
+    v-if="icon"
+    :src="icon.src"
+    :alt="icon.alt"
+    :width="props.width"
+    :height="props.height"
+  />
 </template>
 
 <script setup lang="ts">
