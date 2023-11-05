@@ -1,5 +1,6 @@
 package utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.amire.entities.AnnonceEntity;
 import com.fr.amire.entities.CandidatureEntity;
 import com.fr.amire.entities.EcoleEntity;
@@ -115,16 +116,16 @@ public class ConvertClass {
                     .append("\"siteWeb\":\"").append(enseignant.getSiteWeb()).append("\",")
                     .append("\"email\":\"").append(enseignant.getEmail()).append("\",")
                     .append("\"telephone\":").append(enseignant.getTelephone()).append(",")
-                    .append("\"typeDeContrat\":\"").append(enseignant.getTypeDeContrat()).append("\"")
-                    .append("\"disponibilites\":\"").append(enseignant.getDisponibilites()).append("\"")
-                    .append("\"competences\":\"").append(enseignant.getCompetences()).append("\"")
-                    .append("\"interetEcole\":\"").append(enseignant.getInteretEcole()).append("\"")
-                    .append("\"interetsDomaines\":\"").append(enseignant.getInteretDomaines()).append("\"")
-                    .append("\"niveauxSouhaites\":\"").append(enseignant.getNiveauxSouhaites()).append("\"")
-                    .append("\"experience\":\"").append(enseignant.getExperience()).append("\"")
-                    .append("\"titresAcademiques\":\"").append(enseignant.getTitresAcademiques()).append("\"")
-                    .append("\"divers\":\"").append(enseignant.getDivers()).append("\"")
-                    .append("\"recommandations\":\"").append(enseignant.getRecommandations()).append("\"")
+                    .append("\"typeDeContrat\":\"").append(enseignant.getTypeDeContrat()).append("\",")
+                    .append("\"disponibilites\":\"").append(enseignant.getDisponibilites()).append("\",")
+                    .append("\"competences\":\"").append(enseignant.getCompetences()).append("\",")
+                    .append("\"interetEcole\":\"").append(enseignant.getInteretEcole()).append("\",")
+                    .append("\"interetsDomaines\":\"").append(enseignant.getInteretDomaines()).append("\",")
+                    .append("\"niveauxSouhaites\":\"").append(enseignant.getNiveauxSouhaites()).append("\",")
+                    .append("\"experience\":\"").append(enseignant.getExperience()).append("\",")
+                    .append("\"titresAcademiques\":\"").append(enseignant.getTitresAcademiques()).append("\",")
+                    .append("\"divers\":\"").append(enseignant.getDivers()).append("\",")
+                    .append("\"recommandations\":\"").append(enseignant.getRecommandations()).append("\",")
                     .append("\"evaluation\":\"").append(enseignant.getEvaluation()).append("\"")
                     .append("}");
             if (i < enseignants.size() - 1) {
@@ -135,4 +136,15 @@ public class ConvertClass {
         return jsonBuilder.toString();
     }
 
+    public static EnseignantEntity convertJsonToEnseignant(String json) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            EnseignantEntity enseignant = mapper.readValue(json, EnseignantEntity.class);
+            return enseignant;
+        } catch (Exception e) {
+            // Handle any potential exceptions, e.g., JsonParseException, JsonMappingException, IOException
+            e.printStackTrace();
+            return null; // Return null on error
+        }
+    }
 }
