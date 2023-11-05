@@ -14,7 +14,7 @@ import java.io.IOException;
 import static utils.ApiException.ID_EQUALS_ZERO;
 import static utils.ApiException.PARAMETER_MISSING_IN_REQUEST;
 
-@WebServlet("/enseignant")
+@WebServlet("/enseignantById")
 public class EnseignantByIdServlet extends HttpServlet {
 
     private EnseignantService enseignantService;
