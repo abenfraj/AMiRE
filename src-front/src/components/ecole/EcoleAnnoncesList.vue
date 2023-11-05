@@ -1,7 +1,6 @@
 <template>
     <p v-if="listeAnnonces">
-        {{ listeAnnonces }}
-        <Icon name="loader"></Icon>
+        <EcoleAnnonceItem v-for="annonce in listeAnnonces" :key="annonce.id" :annonce="annonce" />
     </p>
     <LoadingSpinner v-else />
 </template>
@@ -9,8 +8,8 @@
 import { AnnonceApi } from '@/lib/api/annonce.api';
 import type { AnnonceEntity } from '@/lib/api/entities';
 import { onMounted, ref } from 'vue';
-import Icon from '../utils/Icon.vue';
 import LoadingSpinner from "../utils/LoadingSpinner.vue";
+import EcoleAnnonceItem from './EcoleAnnonceItem.vue';
 const listeAnnonces = ref<AnnonceEntity[] | null>()
 
 onMounted(handleFetchAnnonces);

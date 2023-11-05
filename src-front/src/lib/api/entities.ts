@@ -6,6 +6,8 @@ export type AnnonceEntity = {
   description: string;
   idEcole: number;
   expirationAnnonce: string;
+
+  nbCandidatures?: number;
 };
 export type CandidatureEntity = {
   idCandidature: number;
