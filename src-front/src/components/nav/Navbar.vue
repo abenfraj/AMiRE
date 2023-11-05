@@ -6,10 +6,14 @@
 
     <div class="navbar-menu">
       <div class="navbar-start">
-        <NavSearchBarCandidatures v-if="account.type.value == AccountType.Enseignant"/>
+        <NavSearchBarCandidatures
+          v-if="account.type.value == AccountType.Enseignant"
+        />
       </div>
       <div class="navbar-end pr-6">
-        <NavbarIconsContainerVue :accountType="account.type.value"></NavbarIconsContainerVue>
+        <NavbarIconsContainerVue
+          :accountType="account.type.value"
+        ></NavbarIconsContainerVue>
       </div>
     </div>
   </nav>
@@ -20,7 +24,6 @@ import NavBrandedLogo from "./NavBrandedLogo.vue";
 import NavbarIconsContainerVue from "./NavbarIconsContainer.vue";
 import NavSearchBarCandidatures from "./NavSearchbarCandidatures.vue";
 const account = UseAccount();
-
 </script>
 <style scoped>
 .navbar {

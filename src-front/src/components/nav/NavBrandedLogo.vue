@@ -1,7 +1,7 @@
 <template>
-    <RouterLink class="navbar-item" to="/">
-        <img v-if="logo" :src="logo" class="brandedLogo">
-    </RouterLink>
+  <RouterLink class="navbar-item" to="/">
+    <img v-if="logo" :src="logo" class="brandedLogo" />
+  </RouterLink>
 </template>
 <script setup lang="ts">
 import LogoAdmin from "../../assets/logo_admin.png";
@@ -12,23 +12,23 @@ import { AccountType, UseAccount } from "@/lib/composables/useAccount";
 import { computed } from "vue";
 
 const props = defineProps<{
-    accountType: AccountType;
+  accountType: AccountType;
 }>();
 const logo = computed(() => {
-    switch (props.accountType) {
-        case AccountType.Admin:
-            return LogoAdmin;
-        case AccountType.Ecole:
-            return LogoEcole;
-        case AccountType.Enseignant:
-            return LogoEnseignant;
-        default:
-            return LogoDefault;
-    }
+  switch (props.accountType) {
+    case AccountType.Admin:
+      return LogoAdmin;
+    case AccountType.Ecole:
+      return LogoEcole;
+    case AccountType.Enseignant:
+      return LogoEnseignant;
+    default:
+      return LogoDefault;
+  }
 });
 </script>
 <style scoped>
 .brandedLogo {
-    max-height: 2.5rem;
+  max-height: 2.5rem;
 }
 </style>

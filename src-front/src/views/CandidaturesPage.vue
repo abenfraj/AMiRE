@@ -3,6 +3,4 @@
     <p>User - Mes candidatures</p>
   </main>
 </template>
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>

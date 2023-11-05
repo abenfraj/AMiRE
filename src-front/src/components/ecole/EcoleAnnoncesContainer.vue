@@ -1,3 +1,3 @@
 <template>
-    <p>Ecole - Annonces</p>
+  <p>Ecole - Annonces</p>
 </template>

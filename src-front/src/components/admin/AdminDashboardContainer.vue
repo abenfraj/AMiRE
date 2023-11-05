@@ -1,3 +1,3 @@
 <template>
-    <p>Admin - Dashboard</p>
+  <p>Admin - Dashboard</p>
 </template>
