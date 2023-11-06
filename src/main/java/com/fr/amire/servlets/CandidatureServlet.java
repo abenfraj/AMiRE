@@ -1,11 +1,14 @@
 package com.fr.amire.servlets;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.amire.entities.CandidatureEntity;
 import com.fr.amire.services.CandidatureService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.util.Date;
@@ -37,7 +40,7 @@ public class CandidatureServlet extends HttpServlet {
                 return;
             }
 
-            String jsonResponse = convertCandidatureToJson(candidature);
+            String jsonResponse = JsonUtils.convertToJson(candidature);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(jsonResponse);
@@ -77,16 +80,5 @@ public class CandidatureServlet extends HttpServlet {
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid URL format");
         }
-    }
-
-    private String convertCandidatureToJson(CandidatureEntity candidature) {
-        return "{"
-                + "\"idCandidature\":" + candidature.getIdCandidature() + ","
-                + "\"dateCandidature\":\"" + candidature.getDateCandidature() + "\","
-                + "\"contacteParPersonne\":\"" + candidature.getContacteParPersonne() + "\","
-                + "\"contacteLe\":\"" + candidature.getContacteLe() + "\","
-                + "\"decision\":\"" + candidature.getDecision() + "\","
-                + "\"idEnseignant\":" + candidature.getIdEnseignant()
-                + "}";
     }
 }
