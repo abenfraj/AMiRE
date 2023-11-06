@@ -21,4 +21,8 @@ public class EnseignantService {
     public EnseignantEntity getEnseignantById(int id) {
         return enseignantRepository.getEnseignantById(id);
     }
+
+    public boolean updateEnseignant(int id, EnseignantEntity enseignantOutput) {
+        return enseignantRepository.updateEnseignant(id, enseignantOutput);
+    }
 }
