@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ConvertClass;
+import utils.ConversionUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +23,7 @@ public class AnnonceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<AnnonceEntity> annonces = annonceService.getAllAnnonces();
 
-        String jsonResponse = ConvertClass.convertAnnonceListToJson(annonces);
+        String jsonResponse = ConversionUtil.convertAnnonceListToJson(annonces);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

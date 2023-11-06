@@ -8,7 +8,7 @@ import com.fr.amire.entities.EnseignantEntity;
 
 import java.util.List;
 
-public class ConvertClass {
+public class ConversionUtil {
 
     public static String convertEcoleListToJson(List<EcoleEntity> ecoles) {
         StringBuilder jsonBuilder = new StringBuilder("[");
@@ -141,6 +141,18 @@ public class ConvertClass {
         try {
             EnseignantEntity enseignant = mapper.readValue(json, EnseignantEntity.class);
             return enseignant;
+        } catch (Exception e) {
+            // Handle any potential exceptions, e.g., JsonParseException, JsonMappingException, IOException
+            e.printStackTrace();
+            return null; // Return null on error
+        }
+    }
+
+    public static EcoleEntity convertJsonToEcole(String json) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            EcoleEntity ecole = mapper.readValue(json, EcoleEntity.class);
+            return ecole;
         } catch (Exception e) {
             // Handle any potential exceptions, e.g., JsonParseException, JsonMappingException, IOException
             e.printStackTrace();

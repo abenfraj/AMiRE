@@ -9,6 +9,7 @@ public class ApiException {
     public static final String INVALID_CANDIDATURE_DATA = "The given candidature data is invalid";
     public static final String SAVE_CANDIDATURE_ERROR = "An error occurred while saving the candidature";
     public static final String ID_EQUALS_ZERO = "Id cannot be equal to 0";
-    public static final String ERROR_WHILE_UPDATING = "An error occured while updating ";
+    public static final String ERROR_WHILE_UPDATING = "An error occurred while updating ";
     public static final String INVALID_DATA_GIVEN_IN_BODY = "Invalid data given in body";
+    public static final String ERROR_WHILE_CREATING = "An error occurred while creating ";
 }

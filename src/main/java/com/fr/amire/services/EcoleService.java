@@ -22,12 +22,7 @@ public class EcoleService {
         return ecoleRepository.getEcoleById(id);
     }
 
-    public boolean saveEcole(EcoleEntity ecole) {
-        try {
+    public void save(EcoleEntity ecole) {
             ecoleRepository.save(ecole);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 }
