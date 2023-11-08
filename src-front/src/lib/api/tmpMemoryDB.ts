@@ -55,7 +55,7 @@ export const __tmpCandidatures: CandidatureEntity[] = [
     dateCandidature: "2021-06-01",
     contacteParPersonne: "John Doe",
     contacteLe: "2021-06-15",
-    decision: "En attente",
+    decision: "Attente",
     idEnseignant: 1,
     enseignant: __tmpTeacher,
     annonce: __tmpAnnonces[0],

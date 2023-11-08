@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 export enum AccountType {
   Admin = "Admin",
@@ -8,17 +8,23 @@ export enum AccountType {
 }
 
 const accountTypeSingleton = ref<AccountType>(AccountType.Disconnected);
+const accountIdSingleton = ref<number>(0);
 
 export function UseAccount() {
-  setAccountTypeValue();
+  onMounted(() => {
+    setAccountTypeValue();
+    setAccountId();
+  });
   // TODO : check cookie
   return {
     type: accountTypeSingleton,
+    id: accountIdSingleton,
   };
 }
 
 function setAccountTypeValue() {
-  switch (getCookie("accountType")) {
+  const accountType = getCookie("userType");
+  switch (accountType) {
     case AccountType.Admin:
       accountTypeSingleton.value = AccountType.Admin;
       break;
@@ -29,8 +35,15 @@ function setAccountTypeValue() {
       accountTypeSingleton.value = AccountType.Ecole;
       break;
     default:
+      console.warn("Unknown account type", accountType);
       accountTypeSingleton.value = AccountType.Disconnected;
       break;
+  }
+}
+function setAccountId() {
+  const id = Number(getCookie("userId"));
+  if (Number.isInteger(id)) {
+    accountIdSingleton.value = id;
   }
 }
 

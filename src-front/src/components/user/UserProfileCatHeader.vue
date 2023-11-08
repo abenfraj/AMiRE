@@ -1,6 +1,6 @@
 <template>
   <form @submit="handleSubmit" :class="{ box: isEdit }">
-    <div class="block is-flex is-justify-content-flex-end gap-4">
+    <div v-if="account.type.value == 'Enseignant'" class="block is-flex is-justify-content-flex-end gap-4">
       <button v-if="isEdit" class="button is-primary" type="submit">
         Sauvegarder
       </button>
@@ -68,12 +68,14 @@
 import type { EnseignantEntity } from "@/lib/api/entities";
 import { reactive, ref } from "vue";
 import EditableText from "@/components/utils/EditableText.vue";
+import { UseAccount } from "@/lib/composables/useAccount";
 
 const emits = defineEmits(["triggerPatch"]);
 const props = defineProps<{
   profile: EnseignantEntity;
 }>();
 
+const account = UseAccount();
 const enseignant = reactive<EnseignantEntity>(props.profile);
 const isEdit = ref<boolean>(false);
 

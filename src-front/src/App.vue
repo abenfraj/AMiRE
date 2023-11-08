@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :data-account-type="account.type.value">
     <Navbar></Navbar>
     <RouterView />
     <footer class="footer">
@@ -13,4 +13,6 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import Navbar from "@/components/nav/Navbar.vue";
+import { UseAccount } from "@/lib/composables/useAccount";
+const account = UseAccount();
 </script>

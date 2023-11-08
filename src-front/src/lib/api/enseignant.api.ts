@@ -8,7 +8,7 @@ export class EnseignantApi {
    * GET /teacher/:id
    * @returns {EnseignantEntity}
    */
-  public static async getEnseignant(): Promise<EnseignantEntity> {
+  public static async getEnseignant(id: number): Promise<EnseignantEntity> {
     await tmpPause();
     return __tmpTeacher;
   }
@@ -18,6 +18,7 @@ export class EnseignantApi {
    * PATCH /teacher/:id
    */
   public static async saveEnseignant(
+    id: number,
     teacher: Partial<EnseignantEntity>,
   ): Promise<EnseignantEntity> {
     Object.assign(__tmpTeacher, teacher);

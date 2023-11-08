@@ -10,14 +10,17 @@
         <slot></slot>
       </section>
       <footer class="modal-card-foot is-justify-content-end">
-        <button class="button" @click="handleClose">Annuler</button>
-        <button
-          class="button is-success"
-          @click="handleSave"
-          :disabled="props.isLoading"
-        >
-          {{ props.isLoading ? "Sauvegarde en cours..." : "Enregistrer" }}
-        </button>
+        <button v-if="props.variant == 'ok'" class="button" @click="handleClose">Fermer</button>
+        <template v-else>
+          <button class="button" @click="handleClose">Annuler</button>
+          <button
+            class="button is-success"
+            @click="handleSave"
+            :disabled="props.isLoading"
+          >
+            {{ props.isLoading ? "Sauvegarde en cours..." : "Enregistrer" }}
+          </button>
+        </template>
       </footer>
     </div>
   </div>
@@ -27,6 +30,7 @@ const props = defineProps<{
   title: string;
   isLoading?: boolean;
   isActive: boolean;
+  variant?: "ok"
 }>();
 const emits = defineEmits(["close", "save"]);
 const handleClose = (e) => {

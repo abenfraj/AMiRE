@@ -67,7 +67,7 @@ export class AnnonceApi {
       dateCandidature: new Date().toISOString(),
       contacteParPersonne: "N/A",
       contacteLe: "N/A",
-      decision: "En attente",
+      decision: "Attente",
       idEnseignant: __tmpTeacher.idEnseignant,
       annonce,
       enseignant: __tmpTeacher,

@@ -35,3 +35,14 @@
 .no-border {
   border: 1px solid transparent;
 }
+
+
+.is-ecole-only, .is-enseignant-only {
+  display: none;
+}
+[data-account-type="Ecole"] .is-ecole-only {
+  display: initial;
+}
+[data-account-type="Enseignant"] .is-enseignant-only {
+  display: initial;
+}

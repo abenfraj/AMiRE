@@ -19,7 +19,6 @@ import AdminDashboardContainerVue from "@/components/admin/AdminDashboardContain
 import PleaseLoginVue from "@/components/PleaseLogin.vue";
 import { UseAccount } from "@/lib/composables/useAccount";
 import { AccountType } from "@/lib/composables/useAccount";
-import { relative } from "path";
 
 const account = UseAccount();
 </script>

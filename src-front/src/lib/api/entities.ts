@@ -14,7 +14,7 @@ export type CandidatureEntity = {
   dateCandidature: string;
   contacteParPersonne: string;
   contacteLe: string;
-  decision: string;
+  decision: "Attente" | "Acceptée" | "Refusée";
   idEnseignant: number;
 
   annonce?: AnnonceEntity;
