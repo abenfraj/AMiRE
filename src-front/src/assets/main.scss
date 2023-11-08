@@ -36,8 +36,8 @@
   border: 1px solid transparent;
 }
 
-
-.is-ecole-only, .is-enseignant-only {
+.is-ecole-only,
+.is-enseignant-only {
   display: none;
 }
 [data-account-type="Ecole"] .is-ecole-only {

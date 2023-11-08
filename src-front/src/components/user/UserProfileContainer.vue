@@ -13,7 +13,7 @@
       @trigger-patch="patchProfile(profile)"
     ></UserProfileCatExperience>
   </div>
-  <LoadingSpinner v-if="!profile || isLoading"/>
+  <LoadingSpinner v-if="!profile || isLoading" />
 </template>
 <script setup lang="ts">
 import { EnseignantApi } from "@/lib/api/enseignant.api";
@@ -33,11 +33,16 @@ const isLoading = ref<boolean>(false);
 const account = UseAccount();
 
 const getProfile = async () => {
-  profile.value = await EnseignantApi.getEnseignant(props.userId ?? account.id.value);
+  profile.value = await EnseignantApi.getEnseignant(
+    props.userId ?? account.id.value,
+  );
 };
 const patchProfile = async (newProfile: Partial<EnseignantEntity>) => {
   isLoading.value = true;
-  profile.value = await EnseignantApi.saveEnseignant(props.userId ?? account.id.value, newProfile);
+  profile.value = await EnseignantApi.saveEnseignant(
+    props.userId ?? account.id.value,
+    newProfile,
+  );
   isLoading.value = false;
 };
 

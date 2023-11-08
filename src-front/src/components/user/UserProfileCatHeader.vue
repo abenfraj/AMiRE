@@ -1,6 +1,9 @@
 <template>
   <form @submit="handleSubmit" :class="{ box: isEdit }">
-    <div v-if="account.type.value == 'Enseignant'" class="block is-flex is-justify-content-flex-end gap-4">
+    <div
+      v-if="account.type.value == 'Enseignant'"
+      class="block is-flex is-justify-content-flex-end gap-4"
+    >
       <button v-if="isEdit" class="button is-primary" type="submit">
         Sauvegarder
       </button>

@@ -10,7 +10,13 @@
         <slot></slot>
       </section>
       <footer class="modal-card-foot is-justify-content-end">
-        <button v-if="props.variant == 'ok'" class="button" @click="handleClose">Fermer</button>
+        <button
+          v-if="props.variant == 'ok'"
+          class="button"
+          @click="handleClose"
+        >
+          Fermer
+        </button>
         <template v-else>
           <button class="button" @click="handleClose">Annuler</button>
           <button
@@ -30,7 +36,7 @@ const props = defineProps<{
   title: string;
   isLoading?: boolean;
   isActive: boolean;
-  variant?: "ok"
+  variant?: "ok";
 }>();
 const emits = defineEmits(["close", "save"]);
 const handleClose = (e) => {

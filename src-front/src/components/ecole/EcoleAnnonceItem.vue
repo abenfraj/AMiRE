@@ -10,8 +10,16 @@
     </div>
     <p class="annonceDescription">{{ props.annonce.description }}</p>
     <div class="buttons is-justify-content-end">
-      <RouterLink :to="`/annonce/${props.annonce.id}`" class="button no-border is-small">Détails de l'annonce</RouterLink>
-      <RouterLink :to="`/annonce/${props.annonce.id}`" class="button is-primary is-small">Liste des candidatures</RouterLink>
+      <RouterLink
+        :to="`/annonce/${props.annonce.id}`"
+        class="button no-border is-small"
+        >Détails de l'annonce</RouterLink
+      >
+      <RouterLink
+        :to="`/annonce/${props.annonce.id}`"
+        class="button is-primary is-small"
+        >Liste des candidatures</RouterLink
+      >
     </div>
     <hr />
   </div>

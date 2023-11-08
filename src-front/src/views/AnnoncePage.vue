@@ -10,33 +10,38 @@
       <p>Expire le : {{ annonce.expirationAnnonce }}</p>
     </div>
     <h3 class="title is-5">Liste des candidatures</h3>
-    <CandidatureList :candidatures="candidatures" @candidature-status-update="loadCandidatures()"></CandidatureList>
+    <CandidatureList
+      :candidatures="candidatures"
+      @candidature-status-update="loadCandidatures()"
+    ></CandidatureList>
   </main>
 </template>
 <script setup lang="ts">
-import CandidatureList from '@/components/candidature/CandidatureList.vue';
-import LoadingSpinner from '@/components/utils/LoadingSpinner.vue';
-import { AnnonceApi } from '@/lib/api/annonce.api';
-import type { AnnonceEntity, CandidatureEntity } from '@/lib/api/entities';
-import { onMounted, ref } from 'vue';
+import CandidatureList from "@/components/candidature/CandidatureList.vue";
+import LoadingSpinner from "@/components/utils/LoadingSpinner.vue";
+import { AnnonceApi } from "@/lib/api/annonce.api";
+import type { AnnonceEntity, CandidatureEntity } from "@/lib/api/entities";
+import { onMounted, ref } from "vue";
 
 const props = defineProps<{
-    idAnnonce: string;
-}>()
+  idAnnonce: string;
+}>();
 
 const candidatures = ref<CandidatureEntity[]>([]);
 const annonce = ref<AnnonceEntity | undefined>(undefined);
 const isLoading = ref<boolean>(true);
 
 onMounted(async () => {
-    const idAnnonce = Number(props.idAnnonce);
-    annonce.value = (await AnnonceApi.getAnnonces()).find(a => a.id == idAnnonce);
-    await loadCandidatures();
+  const idAnnonce = Number(props.idAnnonce);
+  annonce.value = (await AnnonceApi.getAnnonces()).find(
+    (a) => a.id == idAnnonce,
+  );
+  await loadCandidatures();
 });
 async function loadCandidatures() {
-    const idAnnonce = Number(props.idAnnonce);
-    isLoading.value = true;
-    candidatures.value = await AnnonceApi.getCandidaturesOfOffer(idAnnonce);
-    isLoading.value = false;
+  const idAnnonce = Number(props.idAnnonce);
+  isLoading.value = true;
+  candidatures.value = await AnnonceApi.getCandidaturesOfOffer(idAnnonce);
+  isLoading.value = false;
 }
 </script>

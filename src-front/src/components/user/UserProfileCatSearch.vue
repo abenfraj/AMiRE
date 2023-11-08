@@ -10,7 +10,13 @@
       <button v-if="isEdit" class="button is-primary" type="submit">
         Enregistrer les changements
       </button>
-      <div v-else class="button is-small is-enseignant-only" @click="handleEditBtn">Modifier</div>
+      <div
+        v-else
+        class="button is-small is-enseignant-only"
+        @click="handleEditBtn"
+      >
+        Modifier
+      </div>
     </div>
     <div>
       <div class="field">
