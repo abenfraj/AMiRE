@@ -38,4 +38,12 @@ public class CandidatureService {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(request.getReader(), CandidatureEntity.class);
     }
+
+    public boolean updateCandidature(int idCandidature, CandidatureEntity candidatureFromBody) {
+        return candidatureRepository.updateCandidature(idCandidature, candidatureFromBody);
+    }
+
+    public CandidatureEntity getCandidatureById(int idCandidature) {
+        return candidatureRepository.getCandidatureById(idCandidature);
+    }
 }

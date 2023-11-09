@@ -39,7 +39,7 @@ public class CandidatureServlet extends HttpServlet {
                 return;
             }
 
-            String jsonResponse = ConversionUtil.convertCandidatureToJson(candidature);
+            String jsonResponse = ConversionUtil.convertSingleCandidatureToJson(candidature);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(jsonResponse);

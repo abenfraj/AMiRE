@@ -1,5 +1,6 @@
 package utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.amire.entities.AnnonceEntity;
 import com.fr.amire.entities.CandidatureEntity;
@@ -68,7 +69,28 @@ public class ConversionUtil {
         return jsonBuilder.toString();
     }
 
-    public static String convertCandidatureToJson(CandidatureEntity candidature) {
+    public static String convertCandidatureListToJson(List<CandidatureEntity> candidatures) {
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (int i = 0; i < candidatures.size(); i++) {
+            CandidatureEntity candidature = candidatures.get(i);
+            jsonBuilder.append("{")
+                    .append("\"idCandidature\":").append(candidature.getIdCandidature()).append(",")
+                    .append("\"dateCandidature\":\"").append(candidature.getDateCandidature()).append("\",")
+                    .append("\"contacteParPersonne\":\"").append(candidature.getContacteParPersonne()).append("\",")
+                    .append("\"contacteLe\":\"").append(candidature.getContacteLe()).append("\",")
+                    .append("\"decision\":\"").append(candidature.getDecision()).append("\",")
+                    .append("\"idEnseignant\":").append(candidature.getIdEnseignant())
+                    .append("}");
+            if (i < candidatures.size() - 1) {
+                jsonBuilder.append(", ");
+            }
+        }
+        jsonBuilder.append("]");
+        return jsonBuilder.toString();
+    }
+
+
+    public static String convertSingleCandidatureToJson(CandidatureEntity candidature) {
         return "{"
                 + "\"idCandidature\":" + candidature.getIdCandidature() + ","
                 + "\"dateCandidature\":\"" + candidature.getDateCandidature() + "\","
@@ -142,9 +164,8 @@ public class ConversionUtil {
             EnseignantEntity enseignant = mapper.readValue(json, EnseignantEntity.class);
             return enseignant;
         } catch (Exception e) {
-            // Handle any potential exceptions, e.g., JsonParseException, JsonMappingException, IOException
             e.printStackTrace();
-            return null; // Return null on error
+            return null;
         }
     }
 
@@ -154,9 +175,18 @@ public class ConversionUtil {
             EcoleEntity ecole = mapper.readValue(json, EcoleEntity.class);
             return ecole;
         } catch (Exception e) {
-            // Handle any potential exceptions, e.g., JsonParseException, JsonMappingException, IOException
             e.printStackTrace();
-            return null; // Return null on error
+            return null;
         }
     }
+
+    public static CandidatureEntity convertJsonToCandidature(String json) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(json, CandidatureEntity.class);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+    }
+
 }
