@@ -1,4 +1,4 @@
-package com.fr.amire.servlets;
+package com.fr.amire.servlets.login;
 
 import com.fr.amire.entities.AccountEntity;
 import com.fr.amire.services.AccountService;

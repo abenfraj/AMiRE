@@ -1,4 +1,4 @@
-package com.fr.amire.servlets;
+package com.fr.amire.servlets.login;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;

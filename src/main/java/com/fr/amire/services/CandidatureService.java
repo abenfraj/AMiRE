@@ -6,9 +6,7 @@ import com.fr.amire.repositories.CandidatureRepository;
 import jakarta.ejb.EJB;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 public class CandidatureService {
@@ -39,5 +37,13 @@ public class CandidatureService {
     public CandidatureEntity parseCandidatureFromRequest(HttpServletRequest request) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(request.getReader(), CandidatureEntity.class);
+    }
+
+    public boolean updateCandidature(int idCandidature, CandidatureEntity candidatureFromBody) {
+        return candidatureRepository.updateCandidature(idCandidature, candidatureFromBody);
+    }
+
+    public CandidatureEntity getCandidatureById(int idCandidature) {
+        return candidatureRepository.getCandidatureById(idCandidature);
     }
 }
