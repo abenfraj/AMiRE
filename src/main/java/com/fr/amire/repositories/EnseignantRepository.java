@@ -1,6 +1,5 @@
 package com.fr.amire.repositories;
 
-import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

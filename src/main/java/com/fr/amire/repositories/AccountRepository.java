@@ -22,12 +22,28 @@ public class AccountRepository {
 
     public AccountEntity findByUsername(String username) {
         try {
-            return em.createQuery("SELECT a FROM AccountEntity a WHERE a.username = :username", AccountEntity.class)
+            return em.createQuery("SELECT a FROM AccountEntity a WHERE a.name = :username", AccountEntity.class)
                     .setParameter("username", username)
                     .getSingleResult();
         } catch (NoResultException e) {
             LOGGER.warning("No result found for username: " + username);
             return null;
         }
+    }
+
+    public boolean existsInEcole(int accountId) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(e) FROM EcoleEntity e WHERE e.idEcole = :accountId", Long.class);
+        query.setParameter("accountId", accountId);
+        Long count = query.getSingleResult();
+        return count > 0;
+    }
+
+    public boolean existsInEnseignant(int accountId) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(e) FROM EnseignantEntity e WHERE e.idenseignant = :accountId", Long.class);
+        query.setParameter("accountId", accountId);
+        Long count = query.getSingleResult();
+        return count > 0;
     }
 }

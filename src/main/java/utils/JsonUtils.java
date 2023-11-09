@@ -2,7 +2,6 @@ package utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fr.amire.entities.AnnonceEntity;
 
 import java.util.List;
 

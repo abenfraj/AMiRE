@@ -1,6 +1,7 @@
 package com.fr.amire.servlets;
 
 import com.fr.amire.entities.AccountEntity;
+import com.fr.amire.services.AccountService;
 import com.fr.amire.services.AuthenticationService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
@@ -15,6 +16,9 @@ public class LoginServlet extends HttpServlet {
 
     @EJB
     private AuthenticationService authenticationService;
+
+    @EJB
+    private AccountService accountService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
@@ -37,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 
     private void addCookiesToResponse(HttpServletResponse response, AccountEntity account) {
         Cookie idCookie = new Cookie("userId", String.valueOf(account.getId()));
-        Cookie typeCookie = new Cookie("userType", account.getType());
+        Cookie typeCookie = new Cookie("userType", accountService.getTypeForAccount(account.getId()));
 
         idCookie.setMaxAge(60 * 60 * 24);  // 1 day
         typeCookie.setMaxAge(60 * 60 * 24);  // 1 day
