@@ -21,8 +21,8 @@ public class CandidatureService {
         return candidatureRepository.getAllCandidatures();
     }
 
-    public CandidatureEntity getCandidatureByOfferId(int idCandidature) {
-        return candidatureRepository.getCandidatureByOfferId(idCandidature);
+    public List<CandidatureEntity> getCandidaturesByOfferId(int idAnnonce) {
+        return candidatureRepository.getCandidaturesByOfferId(idAnnonce);
     }
 
     public boolean saveCandidature(CandidatureEntity candidature) {
@@ -45,5 +45,9 @@ public class CandidatureService {
 
     public CandidatureEntity getCandidatureById(int idCandidature) {
         return candidatureRepository.getCandidatureById(idCandidature);
+    }
+
+    public List<CandidatureEntity> getCandidaturesByEnseignantId(int idEnseignant) {
+        return candidatureRepository.getCandidaturesByEnseignantId(idEnseignant);
     }
 }

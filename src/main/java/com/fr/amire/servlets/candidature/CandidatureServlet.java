@@ -7,12 +7,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.ConversionUtil;
+import utils.JsonUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 import static utils.ApiException.*;
 
-@WebServlet("/candidature")
+@WebServlet("/candidatures/*")
 public class CandidatureServlet extends HttpServlet {
     private CandidatureService candidatureService;
 
@@ -24,60 +26,55 @@ public class CandidatureServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
 
-        if (pathParts.length == 3 && "candidature".equals(pathParts[2])) {
-            int idCandidature;
-            try {
-                idCandidature = Integer.parseInt(pathParts[1]);
-            } catch (NumberFormatException e) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, WRONG_OFFER_ID);
-                return;
-            }
-
-            CandidatureEntity candidature = candidatureService.getCandidatureByOfferId(idCandidature);
-            if (candidature == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, NO_CANDIDATURE_FOUND + idCandidature);
-                return;
-            }
-
-            String jsonResponse = ConversionUtil.convertSingleCandidatureToJson(candidature);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonResponse);
-        } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, WRONG_URL_FORMAT);
+        if (pathParts.length != 2) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid URL format");
+            return;
         }
+        int idAnnonce;
+        try {
+            idAnnonce = Integer.parseInt(pathParts[1]);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid offer ID");
+            return;
+        }
+
+        List<CandidatureEntity> candidatures = candidatureService.getCandidaturesByOfferId(idAnnonce);
+        if (candidatures == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "No candidature found for offer ID: " + idAnnonce);
+            return;
+        }
+
+        String jsonResponse = JsonUtils.convertToJson(candidatures);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(jsonResponse);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
 
-        if (pathParts.length == 3 && "candidature".equals(pathParts[2])) {
-            int idCandidature;
-            try {
-                idCandidature = Integer.parseInt(pathParts[1]);
-            } catch (NumberFormatException e) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, WRONG_OFFER_ID);
-                return;
-            }
+        if (pathParts.length != 2) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid URL format");
+            return;
+        }
 
-            CandidatureEntity newCandidature = candidatureService.parseCandidatureFromRequest(request);
+        // Parse the candidature data from the request body
+        CandidatureEntity candidature = candidatureService.parseCandidatureFromRequest(request);
 
-            if (newCandidature == null) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, INVALID_CANDIDATURE_DATA);
-                return;
-            }
+        if (candidature == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid candidature data");
+            return;
+        }
 
-            boolean saveSuccess = candidatureService.saveCandidature(newCandidature);
+        // Save the candidature
+        boolean saveSuccess = candidatureService.saveCandidature(candidature);
 
-            if (!saveSuccess) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, SAVE_CANDIDATURE_ERROR);
-            } else {
-                response.setStatus(HttpServletResponse.SC_CREATED);
-                response.getWriter().write("Candidature created successfully for offer ID: " + idCandidature);
-            }
+        if (!saveSuccess) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to save candidature");
         } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, WRONG_URL_FORMAT);
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("Candidature created successfully");
         }
     }
 }
