@@ -64,7 +64,7 @@ export const __tmpCandidatures: CandidatureEntity[] = [
 
 export const __tmpEcoles: EcoleEntity[] = [
   {
-    idEcole: 1,
+    id: 1,
     raisonSociale: "EFREI",
     competences: "Informatique",
     besoins: "Intervenants extérieurs pour les M1 car les gens font grève",

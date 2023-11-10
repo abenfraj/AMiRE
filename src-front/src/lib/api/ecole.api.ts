@@ -1,5 +1,7 @@
 import type { EcoleEntity } from "./entities";
 import { __tmpEcoles } from "./tmpMemoryDB";
+import axios from "axios";
+import {API_ENDPOINT} from "./entities";
 
 export class EcoleApi {
   /**
@@ -8,13 +10,10 @@ export class EcoleApi {
    * POST /ecole/
    */
   public static async createEcole(
-    ecole: Omit<EcoleEntity, "idEcole">,
+    ecole: Omit<EcoleEntity, "id">,
   ): Promise<EcoleEntity[]> {
-    __tmpEcoles.push({
-      ...ecole,
-      idEcole: __tmpEcoles.length + 1,
-    });
-    return __tmpEcoles;
+    const req = await axios.post(`${API_ENDPOINT}/ecole/create`, ecole);
+    return req.data;
   }
 
   /**
@@ -23,7 +22,8 @@ export class EcoleApi {
    * GET /ecole/
    */
   public static async getEcoles(): Promise<EcoleEntity[]> {
-    return __tmpEcoles;
+    const req = await axios.get(`${API_ENDPOINT}/ecole`);
+    return req.data;
   }
 
   /**
@@ -31,7 +31,7 @@ export class EcoleApi {
    * GET /ecole/:id
    */
   public static async getEcole(id: number): Promise<EcoleEntity> {
-    const found = __tmpEcoles.find((e) => e.idEcole === id);
+    const found = __tmpEcoles.find((e) => e.id === id);
     if (!found) {
       throw new Error("404 Ecole (id) not found");
     }

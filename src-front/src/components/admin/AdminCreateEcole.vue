@@ -82,7 +82,7 @@ const props = defineProps<{
 const emits = defineEmits(["close"]);
 const isLoading = ref(false);
 
-const ecoleToSend: Omit<EcoleEntity, "idEcole"> = reactive({
+const ecoleToSend: Omit<EcoleEntity, "id"> = reactive({
   raisonSociale: "",
   competences: "",
   besoins: "",

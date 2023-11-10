@@ -48,7 +48,7 @@ export type EnseignantEntity = {
 };
 
 export type EcoleEntity = {
-  idEcole: number;
+  id: number;
   raisonSociale: string;
   competences: string;
   besoins: string;
