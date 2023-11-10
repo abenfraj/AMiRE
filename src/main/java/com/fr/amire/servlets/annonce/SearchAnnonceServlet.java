@@ -1,15 +1,14 @@
-package com.fr.amire.servlets;
+package com.fr.amire.servlets.annonce;
 
 import com.fr.amire.entities.AnnonceEntity;
 import com.fr.amire.services.AnnonceService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.ApiException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/annonce/search")
@@ -23,7 +22,7 @@ public class SearchAnnonceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String searchQuery = request.getParameter("q");
         if (searchQuery == null || searchQuery.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Search query is missing");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, ApiException.PARAMETER_MISSING_IN_REQUEST);
             return;
         }
 
