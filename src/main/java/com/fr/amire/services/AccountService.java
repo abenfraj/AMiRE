@@ -1,5 +1,6 @@
 package com.fr.amire.services;
 
+import com.fr.amire.entities.AccountEntity;
 import com.fr.amire.repositories.AccountRepository;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -12,6 +13,10 @@ public class AccountService {
 
     public AccountService() {
         this.accountRepository = new AccountRepository();
+    }
+
+    public void saveAccount(AccountEntity account) {
+        accountRepository.save(account);
     }
 
     public String getTypeForAccount(int accountId) {

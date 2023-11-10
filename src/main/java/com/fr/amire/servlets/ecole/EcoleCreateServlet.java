@@ -1,12 +1,14 @@
 package com.fr.amire.servlets.ecole;
 
+import com.fr.amire.entities.AccountEntity;
 import com.fr.amire.entities.EcoleEntity;
+import com.fr.amire.services.AccountService;
 import com.fr.amire.services.EcoleService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ConversionUtil;
+import utils.JsonUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,9 +19,11 @@ import static utils.ApiException.INVALID_DATA_GIVEN_IN_BODY;
 public class EcoleCreateServlet extends HttpServlet {
 
     private EcoleService ecoleService;
+    private AccountService accountService;
 
     public void init() {
         this.ecoleService = new EcoleService();
+        this.accountService = new AccountService();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -29,13 +33,20 @@ public class EcoleCreateServlet extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             requestBody.append(line);
         }
-        EcoleEntity newEcole = ConversionUtil.convertJsonToEcole(requestBody.toString());
 
+        EcoleEntity newEcole = JsonUtils.convertJsonToEcole(requestBody.toString());
         if (newEcole != null) {
             ecoleService.save(newEcole);
 
+            AccountEntity newAccount = new AccountEntity();
+            newAccount.setName(newEcole.getUsername());
+            newAccount.setPassword(newEcole.getPassword());
+            newAccount.setEcole(newEcole);
+
+            accountService.saveAccount(newAccount);
+
             response.setStatus(HttpServletResponse.SC_CREATED);
-            String createdEcole = ConversionUtil.convertSingleEcoleToJson(newEcole);
+            String createdEcole = JsonUtils.convertToJson(newEcole);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

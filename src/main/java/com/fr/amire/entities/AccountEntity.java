@@ -44,8 +44,16 @@ public class AccountEntity {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public EcoleEntity getEcole() {
         return ecole;
+    }
+
+    public void setEcole(EcoleEntity ecole) {
+        this.ecole = ecole;
     }
 
     public EnseignantEntity getEnseignant() {

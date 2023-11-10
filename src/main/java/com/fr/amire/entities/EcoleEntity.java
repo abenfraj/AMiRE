@@ -27,6 +27,12 @@ public class EcoleEntity {
     @Basic
     @Column(name = "remarques", nullable = true, length = 256)
     private String remarques;
+    @Basic
+    @Column(name = "username", nullable = true, length = 256)
+    private String username;
+    @Basic
+    @Column(name = "password", nullable = true, length = 256)
+    private String password;
 
     public int getIdEcole() {
         return idEcole;
@@ -82,6 +88,22 @@ public class EcoleEntity {
 
     public void setRemarques(String remarques) {
         this.remarques = remarques;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
