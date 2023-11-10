@@ -13,4 +13,7 @@ export default defineConfig({
   },
   appType: "spa",
   base: "./",
+  build: {
+    outDir: '../src/main/webapp',
+  }
 });
