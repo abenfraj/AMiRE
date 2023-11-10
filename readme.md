@@ -17,3 +17,12 @@ Exécutez les scripts présents dans [src/main/java/utils/database/scripts](src/
 - Candidatures
 
 Utilisez la configuration widlfly sur IntelliJ, avec le WAR du projet en déploiement (un preset est déjà installé).
+
+
+## Front-end
+
+Le front-end a déjà été compilé et ajouté dans le dossier webapp en tant qu'appli statique.
+
+Si vous souhaitez tout de même le compiler, rendez-vous sur le dossier `src-front` et démarrez `npm i && npm run build`.
+Déplacez ensuite le contenu du dossier dist dans le dossier src/main/webapp/index.jsp
+

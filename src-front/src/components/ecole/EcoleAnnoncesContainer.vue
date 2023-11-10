@@ -4,7 +4,7 @@
       <button class="button is-primary" @click="creationModalOpened = true">
         Créer une nouvelle annonce
       </button>
-      <a href="/logout" class="button is-danger">Se déconnecter</a>
+      <a href="logout" class="button is-danger">Se déconnecter</a>
     </div>
     <h1 class="title is-3 has-text-centered">Mes annonces</h1>
     <hr />

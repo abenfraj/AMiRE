@@ -15,11 +15,11 @@ public class LogoutServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
+                cookie.setValue("");
                 cookie.setMaxAge(0);
-                cookie.setPath("/");
                 response.addCookie(cookie);
             }
         }
-        response.sendRedirect("index.jsp?message=disconnected");
+        response.sendRedirect("login.jsp?message=disconnected");
     }
 }

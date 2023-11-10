@@ -11,7 +11,7 @@
         <button class="button is-primary" @click="handleEditBtn">
           Modifier les infos de contact
         </button>
-        <a href="/logout" class="button is-danger">Se déconnecter</a>
+        <a href="logout" class="button is-danger">Se déconnecter</a>
       </template>
     </div>
 

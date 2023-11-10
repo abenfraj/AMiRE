@@ -7,7 +7,7 @@
       >
         Ajouter une école
       </button>
-      <a href="/logout" class="button is-danger">Se déconnecter</a>
+      <a href="logout" class="button is-danger">Se déconnecter</a>
     </div>
     <h1 class="title is-3 has-text-centered">Liste des écoles</h1>
     <hr />
