@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ConversionUtil;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -32,7 +32,7 @@ public class CandidaturePutServlet extends HttpServlet {
         }
 
         String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        CandidatureEntity candidatureFromBody = ConversionUtil.convertJsonToCandidature(requestBody);
+        CandidatureEntity candidatureFromBody = JsonUtils.convertJsonToCandidature(requestBody);
 
         if (candidatureFromBody == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, INVALID_DATA_GIVEN_IN_BODY);
@@ -44,7 +44,7 @@ public class CandidaturePutServlet extends HttpServlet {
         if (success) {
             CandidatureEntity updatedCandidature = candidatureService.getCandidatureById(idCandidature);
 
-            String updatedCandidatureJson = ConversionUtil.convertSingleCandidatureToJson(updatedCandidature);
+            String updatedCandidatureJson = JsonUtils.convertToJson(updatedCandidature);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

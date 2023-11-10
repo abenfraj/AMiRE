@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ConversionUtil;
+import utils.JsonUtils;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class EcoleByIdServlet extends HttpServlet {
         }
 
         EcoleEntity ecole = ecoleService.getEcoleById(idEcole);
-        String jsonResponse = ConversionUtil.convertSingleEcoleToJson(ecole);
+        String jsonResponse = JsonUtils.convertToJson(ecole);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
