@@ -10,14 +10,19 @@ public class AccountEntity {
     @Column(name = "id", nullable = false)
     private int id;
     @Basic
-    @Column(name = "username", nullable = false, length = 50)
-    private String username;
+    @Column(name = "name", nullable = true, length = 256)
+    private String name;
     @Basic
-    @Column(name = "password", nullable = true, length = 50)
+    @Column(name = "password", nullable = true, length = 90)
     private String password;
-    @Basic
-    @Column(name = "type", nullable = true, length = 10)
-    private String type;
+
+    @OneToOne
+    @JoinColumn(name = "idEcole", nullable = true)
+    private EcoleEntity ecole;
+
+    @OneToOne
+    @JoinColumn(name = "idEnseignant", nullable = true)
+    private EnseignantEntity enseignant;
 
     public int getId() {
         return id;
@@ -27,20 +32,24 @@ public class AccountEntity {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public EcoleEntity getEcole() {
+        return ecole;
+    }
+
+    public EnseignantEntity getEnseignant() {
+        return enseignant;
     }
 
     @Override
@@ -51,25 +60,16 @@ public class AccountEntity {
         AccountEntity that = (AccountEntity) o;
 
         if (id != that.id) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

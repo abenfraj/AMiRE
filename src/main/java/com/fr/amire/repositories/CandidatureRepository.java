@@ -25,13 +25,13 @@ public class CandidatureRepository {
         return q.getResultList();
     }
 
-    public CandidatureEntity getCandidatureByOfferId(int idCandidature) {
+    public List<CandidatureEntity> getCandidaturesByOfferId(int idAnnonce) {
         try {
-            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idCandidature = :idCandidature", CandidatureEntity.class)
-                    .setParameter("idCandidature", idCandidature)
-                    .getSingleResult();
+            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idAnnonce = :idAnnonce", CandidatureEntity.class)
+                    .setParameter("idAnnonce", idAnnonce)
+                    .getResultList();
         } catch (Exception e) {
-            LOGGER.warning("No result found for offerId: " + idCandidature);
+            LOGGER.warning("No result found for offerId: " + idAnnonce);
             return null;
         }
     }
@@ -73,6 +73,17 @@ public class CandidatureRepository {
                     .getSingleResult();
         } catch (Exception e) {
             LOGGER.warning("No result found for offerId: " + idCandidature);
+            return null;
+        }
+    }
+
+    public List<CandidatureEntity> getCandidaturesByEnseignantId(int idEnseignant) {
+        try {
+            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idEnseignant = :idEnseignant", CandidatureEntity.class)
+                    .setParameter("idEnseignant", idEnseignant)
+                    .getResultList();
+        } catch (Exception e) {
+            LOGGER.warning("No result found for enseignantId: " + idEnseignant);
             return null;
         }
     }

@@ -4,6 +4,7 @@ import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -22,12 +23,30 @@ public class AccountRepository {
 
     public AccountEntity findByUsername(String username) {
         try {
-            return em.createQuery("SELECT a FROM AccountEntity a WHERE a.username = :username", AccountEntity.class)
+            return em.createQuery("SELECT a FROM AccountEntity a WHERE a.name = :username", AccountEntity.class)
                     .setParameter("username", username)
                     .getSingleResult();
         } catch (NoResultException e) {
             LOGGER.warning("No result found for username: " + username);
             return null;
         }
+    }
+
+    public boolean existsInEcole(int accountId) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(a.ecole.idEcole) FROM AccountEntity a WHERE a.id = :accountId", Long.class
+        );
+        query.setParameter("accountId", accountId);
+        Long count = query.getSingleResult();
+        return count > 0;
+    }
+
+    public boolean existsInEnseignant(int accountId) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(a.enseignant.idEnseignant) FROM AccountEntity a WHERE a.id = :accountId", Long.class
+        );
+        query.setParameter("accountId", accountId);
+        Long count = query.getSingleResult();
+        return count > 0;
     }
 }

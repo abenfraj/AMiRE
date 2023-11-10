@@ -24,6 +24,9 @@ public class CandidatureEntity {
     @Basic
     @Column(name = "idEnseignant", nullable = true)
     private Integer idEnseignant;
+    @Basic
+    @Column(name = "idAnnonce", nullable = true)
+    private Integer idAnnonce;
 
     public int getIdCandidature() {
         return idCandidature;
@@ -101,5 +104,13 @@ public class CandidatureEntity {
         result = 31 * result + (decision != null ? decision.hashCode() : 0);
         result = 31 * result + (idEnseignant != null ? idEnseignant.hashCode() : 0);
         return result;
+    }
+
+    public Integer getIdAnnonce() {
+        return idAnnonce;
+    }
+
+    public void setIdAnnonce(Integer idAnnonce) {
+        this.idAnnonce = idAnnonce;
     }
 }

@@ -8,7 +8,7 @@ public class EnseignantEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idenseignant", nullable = false)
-    private int idenseignant;
+    private int idEnseignant;
     @Basic
     @Column(name = "nomEnseignant", nullable = true, length = 256)
     private String nomEnseignant;
@@ -58,12 +58,12 @@ public class EnseignantEntity {
     @Column(name = "evaluation", nullable = true, length = 256)
     private String evaluation;
 
-    public int getIdenseignant() {
-        return idenseignant;
+    public int getIdEnseignant() {
+        return idEnseignant;
     }
 
-    public void setIdenseignant(int idenseignant) {
-        this.idenseignant = idenseignant;
+    public void setIdEnseignant(int idEnseignant) {
+        this.idEnseignant = idEnseignant;
     }
 
     public String getNomEnseignant() {
@@ -201,7 +201,7 @@ public class EnseignantEntity {
 
         EnseignantEntity that = (EnseignantEntity) o;
 
-        if (idenseignant != that.idenseignant) return false;
+        if (idEnseignant != that.idEnseignant) return false;
         if (nomEnseignant != null ? !nomEnseignant.equals(that.nomEnseignant) : that.nomEnseignant != null)
             return false;
         if (prenomEnseignant != null ? !prenomEnseignant.equals(that.prenomEnseignant) : that.prenomEnseignant != null)
@@ -232,7 +232,7 @@ public class EnseignantEntity {
 
     @Override
     public int hashCode() {
-        int result = idenseignant;
+        int result = idEnseignant;
         result = 31 * result + (nomEnseignant != null ? nomEnseignant.hashCode() : 0);
         result = 31 * result + (prenomEnseignant != null ? prenomEnseignant.hashCode() : 0);
         result = 31 * result + (siteWeb != null ? siteWeb.hashCode() : 0);
