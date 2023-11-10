@@ -16,6 +16,14 @@ public class AccountEntity {
     @Column(name = "password", nullable = true, length = 90)
     private String password;
 
+    @OneToOne
+    @JoinColumn(name = "idEcole", nullable = true)
+    private EcoleEntity ecole;
+
+    @OneToOne
+    @JoinColumn(name = "idEnseignant", nullable = true)
+    private EnseignantEntity enseignant;
+
     public int getId() {
         return id;
     }
@@ -36,8 +44,12 @@ public class AccountEntity {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public EcoleEntity getEcole() {
+        return ecole;
+    }
+
+    public EnseignantEntity getEnseignant() {
+        return enseignant;
     }
 
     @Override
@@ -50,7 +62,6 @@ public class AccountEntity {
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
-
         return true;
     }
 
