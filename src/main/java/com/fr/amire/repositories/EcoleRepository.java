@@ -44,20 +44,20 @@ public class EcoleRepository {
             em.getTransaction().rollback();
         }
     }
-    public void delete(int ecoleId) {
+
+    public void deleteEcole(String id) {
         try {
             em.getTransaction().begin();
-            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaDelete<EcoleEntity> delete = criteriaBuilder.createCriteriaDelete(EcoleEntity.class);
-            Root<EcoleEntity> root = delete.from(EcoleEntity.class);
-            delete.where(criteriaBuilder.equal(root.get("idEcole"), ecoleId));
-            em.createQuery(delete).executeUpdate();
+            Query accDel = em.createQuery("delete from AccountEntity account where account.ecole.idEcole = :id");
+            accDel.setParameter("id", Integer.parseInt(id));
+            accDel.executeUpdate();
+            Query ecDel = em.createQuery("delete from EcoleEntity ecoles where ecoles.idEcole = :id");
+            ecDel.setParameter("id", Integer.parseInt(id));
+            ecDel.executeUpdate();
             em.getTransaction().commit();
         } catch (Exception e) {
-            LOGGER.severe("Error while deleting Ecole: " + e.getMessage());
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
+            LOGGER.log(Level.SEVERE, ERROR_WHILE_CREATING, e);
+            em.getTransaction().rollback();
         }
     }
 }

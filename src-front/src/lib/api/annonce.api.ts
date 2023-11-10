@@ -33,7 +33,7 @@ export class AnnonceApi {
    * GET /annonce/
    */
   public static async getAnnonces(): Promise<AnnonceEntity[]> {
-    const req = await axios.get(`${API_ENDPOINT}/annonce`);
+    const req = await axios.get<AnnonceEntity[]>(`${API_ENDPOINT}/annonce`);
     return req.data;
   }
 

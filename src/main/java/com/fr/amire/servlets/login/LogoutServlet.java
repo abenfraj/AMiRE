@@ -20,6 +20,6 @@ public class LogoutServlet extends HttpServlet {
                 response.addCookie(cookie);
             }
         }
-        response.sendRedirect("login.jsp?message=disconnected");
+        response.sendRedirect("./");
     }
 }

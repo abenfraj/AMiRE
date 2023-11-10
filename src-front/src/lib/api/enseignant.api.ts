@@ -31,10 +31,9 @@ export class EnseignantApi {
    * !! Back : Afficher seulement les candidatures du professeur actuel.
    * GET /teacher/:id/candidatures
    */
-  public static async getCandidatures(): Promise<CandidatureEntity[]> {
+  public static async getCandidatures(userId: number): Promise<CandidatureEntity[]> {
     await tmpPause();
-    return __tmpCandidatures.filter(
-      (c) => c.idEnseignant === __tmpTeacher.idEnseignant,
-    );
+    const req = await axios.get(`${API_ENDPOINT}/candidature/${userId}`);
+    return req.data;
   }
 }

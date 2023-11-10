@@ -26,7 +26,7 @@ public class EcoleService {
             ecoleRepository.save(ecole);
     }
 
-    public void delete(int idEcole) {
-            ecoleRepository.delete(idEcole);
+    public void deleteEcole(String id) {
+        ecoleRepository.deleteEcole(id);
     }
 }
