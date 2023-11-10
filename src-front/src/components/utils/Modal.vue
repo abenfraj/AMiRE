@@ -39,11 +39,11 @@ const props = defineProps<{
   variant?: "ok";
 }>();
 const emits = defineEmits(["close", "save"]);
-const handleClose = (e) => {
+const handleClose = (e: Event) => {
   e.preventDefault();
   emits("close");
 };
-const handleSave = (e) => {
+const handleSave = (e: Event) => {
   e.preventDefault();
   emits("save");
 };

@@ -102,19 +102,19 @@ public class ConversionUtil {
     }
 
     public static String convertSingleEnseignantToJson(EnseignantEntity enseignant) {
-        StringBuilder jsonBuilder = new StringBuilder("[");
-        jsonBuilder.append("{")
-                .append("\"idEnseignant\":").append(enseignant.getIdenseignant()).append(",")
+        StringBuilder jsonBuilder = new StringBuilder("{");
+        jsonBuilder
+                .append("\"idEnseignant\":").append(enseignant.getIdEnseignant()).append(",")
                 .append("\"nomEnseignant\":\"").append(enseignant.getNomEnseignant()).append("\",")
                 .append("\"prenomEnseignant\":\"").append(enseignant.getPrenomEnseignant()).append("\",")
                 .append("\"siteWeb\":\"").append(enseignant.getSiteWeb()).append("\",")
                 .append("\"email\":\"").append(enseignant.getEmail()).append("\",")
-                .append("\"telephone\":").append(enseignant.getTelephone()).append(",")
+                .append("\"telephone\":\"").append(enseignant.getTelephone()).append("\",")
                 .append("\"typeDeContrat\":\"").append(enseignant.getTypeDeContrat()).append("\",")
                 .append("\"disponibilites\":\"").append(enseignant.getDisponibilites()).append("\",")
                 .append("\"competences\":\"").append(enseignant.getCompetences()).append("\",")
                 .append("\"interetEcole\":\"").append(enseignant.getInteretEcole()).append("\",")
-                .append("\"interetsDomaines\":\"").append(enseignant.getInteretDomaines()).append("\",")
+                .append("\"interetDomaines\":\"").append(enseignant.getInteretDomaines()).append("\",")
                 .append("\"niveauxSouhaites\":\"").append(enseignant.getNiveauxSouhaites()).append("\",")
                 .append("\"experience\":\"").append(enseignant.getExperience()).append("\",")
                 .append("\"titresAcademiques\":\"").append(enseignant.getTitresAcademiques()).append("\",")
@@ -122,8 +122,6 @@ public class ConversionUtil {
                 .append("\"recommandations\":\"").append(enseignant.getRecommandations()).append("\",")
                 .append("\"evaluation\":\"").append(enseignant.getEvaluation()).append("\"")
                 .append("}");
-
-        jsonBuilder.append("]");
         return jsonBuilder.toString();
     }
 
@@ -132,7 +130,7 @@ public class ConversionUtil {
         for (int i = 0; i < enseignants.size(); i++) {
             EnseignantEntity enseignant = enseignants.get(i);
             jsonBuilder.append("{")
-                    .append("\"idEnseignant\":").append(enseignant.getIdenseignant()).append(",")
+                    .append("\"idEnseignant\":").append(enseignant.getIdEnseignant()).append(",")
                     .append("\"nomEnseignant\":\"").append(enseignant.getNomEnseignant()).append("\",")
                     .append("\"prenomEnseignant\":\"").append(enseignant.getPrenomEnseignant()).append("\",")
                     .append("\"siteWeb\":\"").append(enseignant.getSiteWeb()).append("\",")
@@ -142,7 +140,7 @@ public class ConversionUtil {
                     .append("\"disponibilites\":\"").append(enseignant.getDisponibilites()).append("\",")
                     .append("\"competences\":\"").append(enseignant.getCompetences()).append("\",")
                     .append("\"interetEcole\":\"").append(enseignant.getInteretEcole()).append("\",")
-                    .append("\"interetsDomaines\":\"").append(enseignant.getInteretDomaines()).append("\",")
+                    .append("\"interetDomaines\":\"").append(enseignant.getInteretDomaines()).append("\",")
                     .append("\"niveauxSouhaites\":\"").append(enseignant.getNiveauxSouhaites()).append("\",")
                     .append("\"experience\":\"").append(enseignant.getExperience()).append("\",")
                     .append("\"titresAcademiques\":\"").append(enseignant.getTitresAcademiques()).append("\",")

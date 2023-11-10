@@ -3,7 +3,7 @@
   <input
     v-else
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', ($event.target as any).value)"
     class="input is-inline"
     :placeholder="placeholder"
     :type="type ?? 'text'"

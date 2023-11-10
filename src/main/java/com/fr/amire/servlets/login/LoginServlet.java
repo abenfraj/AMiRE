@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
 
             addCookiesToResponse(response, account);
 
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("index.html");
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
     }

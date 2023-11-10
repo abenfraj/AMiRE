@@ -11,4 +11,9 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  appType: "spa",
+  base: "./",
+  build: {
+    outDir: '../src/main/webapp',
+  }
 });

@@ -25,7 +25,7 @@ export const __tmpTeacher: EnseignantEntity = {
   disponibilites: "- de 8h à 17h",
   competences: "- pédagogie \n- informatique \n- mathématiques",
   interetEcole: "Efrei Paris,Epita,Epitech",
-  interetsDomaines:
+  interetDomaines:
     "Programmation Orientée Objet,Architecture logicielle,L'argent",
   niveauxSouhaites: "L1, M1, M2",
 

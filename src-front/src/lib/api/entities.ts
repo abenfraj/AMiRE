@@ -33,7 +33,7 @@ export type EnseignantEntity = {
   disponibilites: string;
   competences: string;
   interetEcole: string;
-  interetsDomaines: string;
+  interetDomaines: string;
   niveauxSouhaites: string;
 
   experience: string;

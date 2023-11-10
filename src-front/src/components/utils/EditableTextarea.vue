@@ -5,7 +5,7 @@
   <textarea
     v-else
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', ($event.target as any).value)"
     class="textarea"
     :placeholder="placeholder"
     :required="required"
@@ -27,7 +27,7 @@ const props = defineProps<{
 
 const lines = computed(() =>
   props.modelValue.split("\n").map((line, i) => ({
-    line: line.trim().replace(/^\- /, "• "),
+    line: line.trim().replace(/^- /, "• "),
     key: i,
   })),
 );

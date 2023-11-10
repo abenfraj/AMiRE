@@ -23,6 +23,7 @@ public class EnseignantPutServlet extends HttpServlet {
         this.enseignantService = new EnseignantService();
     }
 
+
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idEnseignant = Integer.parseInt(request.getParameter("id"));
         if (idEnseignant == 0) {
@@ -31,6 +32,8 @@ public class EnseignantPutServlet extends HttpServlet {
         }
 
         String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        System.out.println("REQ BODY");
+        System.out.println(requestBody);
         EnseignantEntity enseignantFromBody = ConversionUtil.convertJsonToEnseignant(requestBody);
 
         if (enseignantFromBody == null) {

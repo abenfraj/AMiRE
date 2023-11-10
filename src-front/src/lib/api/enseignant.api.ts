@@ -1,16 +1,19 @@
-import { AnnonceApi } from "./annonce.api";
 import type { CandidatureEntity, EnseignantEntity } from "./entities";
 import { __tmpCandidatures, __tmpTeacher, tmpPause } from "./tmpMemoryDB";
+import axios from "axios";
+
+
+const API_ENDPOINT = document.location.port  === "5173" ? "http://localhost:8080/AMiRE-1.0-SNAPSHOT" : ".";
 
 export class EnseignantApi {
   /**
-   * !! Back : Vérifier que l'utilisateur est bien connecté
    * GET /teacher/:id
    * @returns {EnseignantEntity}
    */
   public static async getEnseignant(id: number): Promise<EnseignantEntity> {
-    await tmpPause();
-    return __tmpTeacher;
+    const req =
+        await axios.get<EnseignantEntity>(`${API_ENDPOINT}/enseignantById?id=${id}`);
+    return req.data;
   }
 
   /**
@@ -21,9 +24,9 @@ export class EnseignantApi {
     id: number,
     teacher: Partial<EnseignantEntity>,
   ): Promise<EnseignantEntity> {
-    Object.assign(__tmpTeacher, teacher);
-    await tmpPause();
-    return __tmpTeacher;
+    const req =
+        await axios.put<EnseignantEntity>(`${API_ENDPOINT}/enseignant/put?id=${id}`, teacher);
+    return req.data;
   }
 
   /**

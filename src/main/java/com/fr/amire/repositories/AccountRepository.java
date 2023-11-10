@@ -4,6 +4,7 @@ import com.fr.amire.entities.AccountEntity;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -33,7 +34,8 @@ public class AccountRepository {
 
     public boolean existsInEcole(int accountId) {
         TypedQuery<Long> query = em.createQuery(
-                "SELECT COUNT(e) FROM EcoleEntity e WHERE e.idEcole = :accountId", Long.class);
+                "SELECT COUNT(a.ecole.idEcole) FROM AccountEntity a WHERE a.id = :accountId", Long.class
+        );
         query.setParameter("accountId", accountId);
         Long count = query.getSingleResult();
         return count > 0;
@@ -41,7 +43,8 @@ public class AccountRepository {
 
     public boolean existsInEnseignant(int accountId) {
         TypedQuery<Long> query = em.createQuery(
-                "SELECT COUNT(e) FROM EnseignantEntity e WHERE e.idenseignant = :accountId", Long.class);
+                "SELECT COUNT(a.enseignant.idEnseignant) FROM AccountEntity a WHERE a.id = :accountId", Long.class
+        );
         query.setParameter("accountId", accountId);
         Long count = query.getSingleResult();
         return count > 0;

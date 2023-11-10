@@ -18,7 +18,7 @@
     >
     <a
       v-if="props.accountType == AccountType.Disconnected"
-      href="/login"
+      href="login.jsp"
       class="button is-primary"
       >Se connecter</a
     >
