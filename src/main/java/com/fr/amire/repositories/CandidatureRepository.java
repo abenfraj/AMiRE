@@ -38,7 +38,7 @@ public class CandidatureRepository {
 
     public void save(CandidatureEntity candidature) {
         em.getTransaction().begin();
-        em.persist(candidature);
+        em.merge(candidature);
         em.getTransaction().commit();
     }
 

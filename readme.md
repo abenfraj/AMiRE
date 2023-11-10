@@ -16,6 +16,8 @@ Exécutez les scripts présents dans [src/main/java/utils/database/scripts](src/
 - Annonces
 - Candidatures
 
+(note : pour créer un dump, utiliser la commande docker exec -it some-mysql mysqldump -u root -proot amire)
+
 Utilisez la configuration widlfly sur IntelliJ, avec le WAR du projet en déploiement (un preset est déjà installé).
 
 
@@ -23,6 +25,6 @@ Utilisez la configuration widlfly sur IntelliJ, avec le WAR du projet en déploi
 
 Le front-end a déjà été compilé et ajouté dans le dossier webapp en tant qu'appli statique.
 
-Si vous souhaitez tout de même le compiler, rendez-vous sur le dossier `src-front` et démarrez `npm i && npm run build`.
-Déplacez ensuite le contenu du dossier dist dans le dossier src/main/webapp/index.jsp
+Si vous souhaitez tout de même le compiler, rendez-vous sur le dossier `src-front` et démarrez `npm i && npm run build`. Les fichiers seront copiés automatiquement, mais il faudra redéployer votre war.
+
 

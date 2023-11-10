@@ -2,7 +2,7 @@
   <p v-if="listeEcoles">
     <AdminEcoleItemVue
       v-for="ecole in listeEcoles"
-      :key="ecole.idEcole"
+      :key="ecole.id"
       :ecole="ecole"
     />
   </p>

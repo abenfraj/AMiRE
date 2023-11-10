@@ -1,3 +1,7 @@
+
+export const API_ENDPOINT = document.location.port  === "5173" ? "http://localhost:8080/AMiRE-1.0-SNAPSHOT" : ".";
+
+
 export type AnnonceEntity = {
   id: number;
   titre: string;
@@ -44,7 +48,7 @@ export type EnseignantEntity = {
 };
 
 export type EcoleEntity = {
-  idEcole: number;
+  id: number;
   raisonSociale: string;
   competences: string;
   besoins: string;
