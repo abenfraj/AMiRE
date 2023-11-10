@@ -4,6 +4,7 @@
       v-for="ecole in listeEcoles"
       :key="ecole.id"
       :ecole="ecole"
+      @delete="handleDeleteEcole"
     />
   </p>
   <LoadingSpinner v-else />
@@ -15,6 +16,7 @@ import LoadingSpinner from "../utils/LoadingSpinner.vue";
 import { EcoleApi } from "@/lib/api/ecole.api";
 import AdminEcoleItemVue from "./AdminEcoleItem.vue";
 
+
 const props = defineProps<{
   modalCreationState: boolean;
 }>();
@@ -23,6 +25,11 @@ const listeEcoles = ref<EcoleEntity[] | null>();
 async function handleFetchEcole() {
   listeEcoles.value = null;
   listeEcoles.value = await EcoleApi.getEcoles();
+}
+
+async function handleDeleteEcole(ecoleId: number) {
+  await EcoleApi.deleteEcole(ecoleId);
+  await handleFetchEcole();
 }
 
 onMounted(handleFetchEcole);

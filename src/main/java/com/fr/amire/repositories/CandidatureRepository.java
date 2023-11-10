@@ -27,7 +27,7 @@ public class CandidatureRepository {
 
     public List<CandidatureEntity> getCandidaturesByOfferId(int idAnnonce) {
         try {
-            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idAnnonce = :idAnnonce", CandidatureEntity.class)
+            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.annonce.idAnnonce = :idAnnonce", CandidatureEntity.class)
                     .setParameter("idAnnonce", idAnnonce)
                     .getResultList();
         } catch (Exception e) {

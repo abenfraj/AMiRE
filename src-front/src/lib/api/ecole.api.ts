@@ -37,4 +37,8 @@ export class EcoleApi {
     }
     return found;
   }
+
+  public static async deleteEcole(id: number) {
+    await axios.delete(`${API_ENDPOINT}/ecole?id=${id}`);
+  }
 }

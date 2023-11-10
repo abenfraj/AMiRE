@@ -42,4 +42,19 @@ public class EcoleRepository {
         }
     }
 
+    public void deleteEcole(String id) {
+        try {
+            em.getTransaction().begin();
+            Query accDel = em.createQuery("delete from AccountEntity account where account.ecole.idEcole = :id");
+            accDel.setParameter("id", Integer.parseInt(id));
+            accDel.executeUpdate();
+            Query ecDel = em.createQuery("delete from EcoleEntity ecoles where ecoles.idEcole = :id");
+            ecDel.setParameter("id", Integer.parseInt(id));
+            ecDel.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, ERROR_WHILE_CREATING, e);
+            em.getTransaction().rollback();
+        }
+    }
 }

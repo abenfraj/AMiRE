@@ -12,7 +12,7 @@
       -->
     <p class="ecoleDescription">{{ props.ecole.besoins }}</p>
     <div class="buttons is-justify-content-end">
-      <button class="button no-border has-text-danger is-small">
+      <button class="button no-border has-text-danger is-small" @click="handleDelete">
         Supprimer l'école
       </button>
     </div>
@@ -22,9 +22,15 @@
 <script setup lang="ts">
 import type { EcoleEntity } from "@/lib/api/entities";
 
+const emits = defineEmits(["delete"]);
+
 const props = defineProps<{
   ecole: EcoleEntity;
 }>();
+
+function handleDelete() {
+  emits('delete', props.ecole.id);
+}
 </script>
 <style scoped>
 .ecoleDescription {
