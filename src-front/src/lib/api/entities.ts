@@ -1,3 +1,7 @@
+
+export const API_ENDPOINT = document.location.port  === "5173" ? "http://localhost:8080/AMiRE-1.0-SNAPSHOT" : ".";
+
+
 export type AnnonceEntity = {
   id: number;
   titre: string;

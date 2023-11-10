@@ -1,5 +1,3 @@
-import { EcoleApi } from "./ecole.api";
-import { EnseignantApi } from "./enseignant.api";
 import type { AnnonceEntity, CandidatureEntity } from "./entities";
 import {
   __tmpAnnonces,
@@ -8,6 +6,8 @@ import {
   __tmpTeacher,
   tmpPause,
 } from "./tmpMemoryDB";
+import axios from "axios";
+import {API_ENDPOINT} from "./entities";
 
 export class AnnonceApi {
   /**
@@ -33,8 +33,8 @@ export class AnnonceApi {
    * GET /annonce/
    */
   public static async getAnnonces(): Promise<AnnonceEntity[]> {
-    await tmpPause();
-    return __tmpAnnonces.filter((a) => a.idEcole === __tmpStores.ecoleId);
+    const req = await axios.get(`${API_ENDPOINT}/annonce`);
+    return req.data;
   }
 
   /**
@@ -79,7 +79,8 @@ export class AnnonceApi {
   public static async getCandidaturesOfOffer(
     offerId: number,
   ): Promise<CandidatureEntity[]> {
-    return __tmpCandidatures.filter((c) => c.annonce?.id === offerId);
+    const req = await axios.get(`${API_ENDPOINT}/candidatures/${offerId}`);
+    return req.data;
   }
 
   /**
@@ -90,13 +91,7 @@ export class AnnonceApi {
   public static async saveCandidature(
     candidature: Partial<CandidatureEntity>,
   ): Promise<CandidatureEntity> {
-    const index = __tmpCandidatures.findIndex(
-      (c) => c.idCandidature === candidature.idCandidature,
-    );
-    if (index < 0) {
-      throw new Error("404 Candidature (id) not found");
-    }
-    __tmpCandidatures[index] = { ...__tmpCandidatures[index], ...candidature };
-    return __tmpCandidatures[index];
+    const req = await axios.post(`${API_ENDPOINT}/candidatures/${candidature.idCandidature}`, candidature);
+    return req.data;
   }
 }

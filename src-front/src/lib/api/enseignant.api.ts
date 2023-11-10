@@ -1,9 +1,7 @@
 import type { CandidatureEntity, EnseignantEntity } from "./entities";
 import { __tmpCandidatures, __tmpTeacher, tmpPause } from "./tmpMemoryDB";
 import axios from "axios";
-
-
-const API_ENDPOINT = document.location.port  === "5173" ? "http://localhost:8080/AMiRE-1.0-SNAPSHOT" : ".";
+import {API_ENDPOINT} from "./entities";
 
 export class EnseignantApi {
   /**
