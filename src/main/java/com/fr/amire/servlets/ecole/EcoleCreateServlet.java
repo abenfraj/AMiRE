@@ -37,14 +37,6 @@ public class EcoleCreateServlet extends HttpServlet {
         EcoleEntity newEcole = JsonUtils.convertJsonToEcole(requestBody.toString());
         if (newEcole != null) {
             ecoleService.save(newEcole);
-
-            AccountEntity newAccount = new AccountEntity();
-            newAccount.setName(newEcole.getUsername());
-            newAccount.setPassword(newEcole.getPassword());
-            newAccount.setEcole(newEcole);
-
-            accountService.saveAccount(newAccount);
-
             response.setStatus(HttpServletResponse.SC_CREATED);
             String createdEcole = JsonUtils.convertToJson(newEcole);
 
