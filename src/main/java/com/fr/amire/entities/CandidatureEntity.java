@@ -24,9 +24,10 @@ public class CandidatureEntity {
     @Basic
     @Column(name = "idEnseignant", nullable = true)
     private Integer idEnseignant;
-    @Basic
-    @Column(name = "idAnnonce", nullable = true)
-    private Integer idAnnonce;
+
+    @OneToOne
+    @JoinColumn(name = "idAnnonce", referencedColumnName = "idAnnonce")
+    private AnnonceEntity annonce;
 
     public int getIdCandidature() {
         return idCandidature;
@@ -38,10 +39,6 @@ public class CandidatureEntity {
 
     public String getDateCandidature() {
         return dateCandidature;
-    }
-
-    public void setDateCandidature(String dateCandidature) {
-        this.dateCandidature = dateCandidature;
     }
 
     public String getContacteParPersonne() {
@@ -76,6 +73,10 @@ public class CandidatureEntity {
         this.idEnseignant = idEnseignant;
     }
 
+    public AnnonceEntity getAnnonce() {
+        return annonce;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,13 +105,5 @@ public class CandidatureEntity {
         result = 31 * result + (decision != null ? decision.hashCode() : 0);
         result = 31 * result + (idEnseignant != null ? idEnseignant.hashCode() : 0);
         return result;
-    }
-
-    public Integer getIdAnnonce() {
-        return idAnnonce;
-    }
-
-    public void setIdAnnonce(Integer idAnnonce) {
-        this.idAnnonce = idAnnonce;
     }
 }

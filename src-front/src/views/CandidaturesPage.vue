@@ -16,10 +16,12 @@ import type { CandidatureEntity } from "@/lib/api/entities";
 import { onMounted, ref } from "vue";
 import CandidatureList from "@/components/candidature/CandidatureList.vue";
 import LoadingSpinner from "@/components/utils/LoadingSpinner.vue";
+import {UseAccount} from "@/lib/composables/useAccount";
 const isLoading = ref<boolean>(true);
 const candidatures = ref<CandidatureEntity[]>([]);
+const account = UseAccount();
 onMounted(async () => {
-  candidatures.value = await EnseignantApi.getCandidatures();
+  candidatures.value = await EnseignantApi.getCandidatures(account.id.value);
   isLoading.value = false;
 });
 </script>

@@ -21,7 +21,7 @@ public class ConversionUtil {
                     .append("\"competences\":\"").append(ecole.getCompetences()).append("\",")
                     .append("\"besoins\":\"").append(ecole.getBesoins()).append("\",")
                     .append("\"exigences\":\"").append(ecole.getExigences()).append("\",")
-                    .append("\"periode\":").append(ecole.getPeriode()).append(",")
+                    .append("\"periode\":\"").append(ecole.getPeriode()).append("\",")
                     .append("\"remarques\":\"").append(ecole.getRemarques()).append("\"")
                     .append("}");
             if (i < ecoles.size() - 1) {
@@ -40,7 +40,7 @@ public class ConversionUtil {
                 .append("\"competences\":\"").append(ecole.getCompetences()).append("\",")
                 .append("\"besoins\":\"").append(ecole.getBesoins()).append("\",")
                 .append("\"exigences\":\"").append(ecole.getExigences()).append("\",")
-                .append("\"periode\":").append(ecole.getPeriode()).append(",")
+                .append("\"periode\":\"").append(ecole.getPeriode()).append("\",")
                 .append("\"remarques\":\"").append(ecole.getRemarques()).append("\"")
                 .append("}");
 

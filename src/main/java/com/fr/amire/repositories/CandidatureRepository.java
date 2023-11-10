@@ -27,7 +27,7 @@ public class CandidatureRepository {
 
     public List<CandidatureEntity> getCandidaturesByOfferId(int idAnnonce) {
         try {
-            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idAnnonce = :idAnnonce", CandidatureEntity.class)
+            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.annonce.idAnnonce = :idAnnonce", CandidatureEntity.class)
                     .setParameter("idAnnonce", idAnnonce)
                     .getResultList();
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class CandidatureRepository {
 
     public void save(CandidatureEntity candidature) {
         em.getTransaction().begin();
-        em.persist(candidature);
+        em.merge(candidature);
         em.getTransaction().commit();
     }
 
@@ -79,7 +79,9 @@ public class CandidatureRepository {
 
     public List<CandidatureEntity> getCandidaturesByEnseignantId(int idEnseignant) {
         try {
-            return em.createQuery("SELECT c FROM CandidatureEntity c WHERE c.idEnseignant = :idEnseignant", CandidatureEntity.class)
+            return em.createQuery(
+                    "SELECT c FROM CandidatureEntity c JOIN FETCH c.annonce WHERE c.idEnseignant = :idEnseignant"
+                            , CandidatureEntity.class)
                     .setParameter("idEnseignant", idEnseignant)
                     .getResultList();
         } catch (Exception e) {

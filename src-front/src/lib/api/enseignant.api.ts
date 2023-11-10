@@ -1,9 +1,7 @@
 import type { CandidatureEntity, EnseignantEntity } from "./entities";
 import { __tmpCandidatures, __tmpTeacher, tmpPause } from "./tmpMemoryDB";
 import axios from "axios";
-
-
-const API_ENDPOINT = document.location.port  === "5173" ? "http://localhost:8080/AMiRE-1.0-SNAPSHOT" : ".";
+import {API_ENDPOINT} from "./entities";
 
 export class EnseignantApi {
   /**
@@ -33,10 +31,9 @@ export class EnseignantApi {
    * !! Back : Afficher seulement les candidatures du professeur actuel.
    * GET /teacher/:id/candidatures
    */
-  public static async getCandidatures(): Promise<CandidatureEntity[]> {
+  public static async getCandidatures(userId: number): Promise<CandidatureEntity[]> {
     await tmpPause();
-    return __tmpCandidatures.filter(
-      (c) => c.idEnseignant === __tmpTeacher.idEnseignant,
-    );
+    const req = await axios.get(`${API_ENDPOINT}/candidature/${userId}`);
+    return req.data;
   }
 }

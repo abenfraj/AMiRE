@@ -32,8 +32,7 @@ public class EnseignantPutServlet extends HttpServlet {
         }
 
         String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        System.out.println("REQ BODY");
-        System.out.println(requestBody);
+
         EnseignantEntity enseignantFromBody = ConversionUtil.convertJsonToEnseignant(requestBody);
 
         if (enseignantFromBody == null) {
