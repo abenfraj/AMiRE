@@ -6,6 +6,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaDelete;
+import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -41,5 +44,20 @@ public class EcoleRepository {
             em.getTransaction().rollback();
         }
     }
-
+    public void delete(int ecoleId) {
+        try {
+            em.getTransaction().begin();
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaDelete<EcoleEntity> delete = criteriaBuilder.createCriteriaDelete(EcoleEntity.class);
+            Root<EcoleEntity> root = delete.from(EcoleEntity.class);
+            delete.where(criteriaBuilder.equal(root.get("idEcole"), ecoleId));
+            em.createQuery(delete).executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.severe("Error while deleting Ecole: " + e.getMessage());
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        }
+    }
 }

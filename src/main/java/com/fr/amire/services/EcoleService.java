@@ -25,4 +25,8 @@ public class EcoleService {
     public void save(EcoleEntity ecole) {
             ecoleRepository.save(ecole);
     }
+
+    public void delete(int idEcole) {
+            ecoleRepository.delete(idEcole);
+    }
 }
