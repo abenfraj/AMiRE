@@ -35,30 +35,7 @@ public class EnseignantRepository {
     public boolean updateEnseignant(int id, EnseignantEntity enseignantOutput) {
         try {
             em.getTransaction().begin();
-
-            EnseignantEntity enseignant = em.find(EnseignantEntity.class, id);
-            if (enseignant == null) {
-                em.getTransaction().rollback();
-                return false;
-            }
-
-            enseignant.setNomEnseignant(enseignantOutput.getNomEnseignant());
-            enseignant.setPrenomEnseignant(enseignantOutput.getPrenomEnseignant());
-            enseignant.setSiteWeb(enseignantOutput.getSiteWeb());
-            enseignant.setEmail(enseignantOutput.getEmail());
-            enseignant.setTelephone(enseignantOutput.getTelephone());
-            enseignant.setTypeDeContrat(enseignantOutput.getTypeDeContrat());
-            enseignant.setDisponibilites(enseignantOutput.getDisponibilites());
-            enseignant.setCompetences(enseignantOutput.getCompetences());
-            enseignant.setInteretEcole(enseignantOutput.getInteretEcole());
-            enseignant.setInteretDomaines(enseignantOutput.getInteretDomaines());
-            enseignant.setNiveauxSouhaites(enseignantOutput.getNiveauxSouhaites());
-            enseignant.setExperience(enseignantOutput.getExperience());
-            enseignant.setTitresAcademiques(enseignantOutput.getTitresAcademiques());
-            enseignant.setDivers(enseignantOutput.getDivers());
-            enseignant.setRecommandations(enseignantOutput.getRecommandations());
-            enseignant.setEvaluation(enseignantOutput.getEvaluation());
-
+            em.merge(enseignantOutput);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
