@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
@@ -48,5 +49,18 @@ public class AccountRepository {
         query.setParameter("accountId", accountId);
         Long count = query.getSingleResult();
         return count > 0;
+    }
+
+    public void save(AccountEntity account) {
+        try {
+            em.getTransaction().begin();
+            em.persist(account);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error while saving account", e);
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        }
     }
 }

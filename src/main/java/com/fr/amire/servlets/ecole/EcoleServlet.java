@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ConversionUtil;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,8 +23,7 @@ public class EcoleServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<EcoleEntity> ecoles = ecoleService.getAllEcoles();
-        String jsonResponse = ConversionUtil.convertEcoleListToJson(ecoles);
-
+        String jsonResponse = JsonUtils.convertToJson(ecoles);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonResponse);

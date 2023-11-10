@@ -27,6 +27,7 @@ public class EcoleEntity {
     @Basic
     @Column(name = "remarques", nullable = true, length = 256)
     private String remarques;
+    @Basic
 
     public int getIdEcole() {
         return idEcole;

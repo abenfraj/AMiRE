@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.ApiException;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,31 +29,10 @@ public class SearchAnnonceServlet extends HttpServlet {
 
         List<AnnonceEntity> searchResults = annonceService.searchAnnonces(searchQuery);
 
-        String jsonResponse = convertListToJson(searchResults);
+        String jsonResponse = JsonUtils.convertToJson(searchResults);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonResponse);
-    }
-
-    private String convertListToJson(List<AnnonceEntity> annonces) {
-        StringBuilder jsonBuilder = new StringBuilder("[");
-        for (int i = 0; i < annonces.size(); i++) {
-            AnnonceEntity annonce = annonces.get(i);
-            jsonBuilder.append("{")
-                    .append("\"id\":").append(annonce.getIdAnnonce()).append(",")
-                    .append("\"titre\":\"").append(annonce.getTitre()).append("\",")
-                    .append("\"niveauxSouhaites\":\"").append(annonce.getNiveauxSouhaites()).append("\",")
-                    .append("\"typeDeContrat\":\"").append(annonce.getTypeDeContrat()).append("\",")
-                    .append("\"description\":\"").append(annonce.getDescription()).append("\",")
-                    .append("\"idEcole\":").append(annonce.getIdEcole()).append(",")
-                    .append("\"expirationAnnonce\":\"").append(annonce.getExpirationAnnonce()).append("\"")
-                    .append("}");
-            if (i < annonces.size() - 1) {
-                jsonBuilder.append(", ");
-            }
-        }
-        jsonBuilder.append("]");
-        return jsonBuilder.toString();
     }
 }

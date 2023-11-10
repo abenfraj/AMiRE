@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ConversionUtil;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ public class EnseignantPutServlet extends HttpServlet {
 
         String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 
-        EnseignantEntity enseignantFromBody = ConversionUtil.convertJsonToEnseignant(requestBody);
+        EnseignantEntity enseignantFromBody = JsonUtils.convertJsonToEnseignant(requestBody);
 
         if (enseignantFromBody == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, INVALID_DATA_GIVEN_IN_BODY);
@@ -45,7 +45,7 @@ public class EnseignantPutServlet extends HttpServlet {
         if (success) {
             EnseignantEntity updatedEnseignant = enseignantService.getEnseignantById(idEnseignant);
 
-            String updatedEnseignantJson = ConversionUtil.convertSingleEnseignantToJson(updatedEnseignant);
+            String updatedEnseignantJson = JsonUtils.convertToJson(updatedEnseignant);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
