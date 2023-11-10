@@ -57,7 +57,7 @@
       <div class="field">
         <label class="label">Domaines d'intérêt</label>
         <EditableTags
-          v-model="enseignant.interetsDomaines"
+          v-model="enseignant.interetDomaines"
           :isEdit="isEdit"
           required
         ></EditableTags>

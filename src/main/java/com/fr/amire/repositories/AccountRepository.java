@@ -43,7 +43,7 @@ public class AccountRepository {
 
     public boolean existsInEnseignant(int accountId) {
         TypedQuery<Long> query = em.createQuery(
-                "SELECT COUNT(a.enseignant.idenseignant) FROM AccountEntity a WHERE a.id = :accountId", Long.class
+                "SELECT COUNT(a.enseignant.idEnseignant) FROM AccountEntity a WHERE a.id = :accountId", Long.class
         );
         query.setParameter("accountId", accountId);
         Long count = query.getSingleResult();

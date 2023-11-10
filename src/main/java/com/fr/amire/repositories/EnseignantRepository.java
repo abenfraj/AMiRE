@@ -27,7 +27,7 @@ public class EnseignantRepository {
     }
 
     public EnseignantEntity getEnseignantById(int id) {
-        Query q = em.createQuery("select enseignants from EnseignantEntity enseignants where enseignants.idenseignant = :id");
+        Query q = em.createQuery("select enseignants from EnseignantEntity enseignants where enseignants.idEnseignant = :id");
         q.setParameter("id", id);
         return (EnseignantEntity) q.getSingleResult();
     }
