@@ -35,6 +35,16 @@ public class EnseignantRepository {
     public boolean updateEnseignant(int id, EnseignantEntity enseignantOutput) {
         try {
             em.getTransaction().begin();
+            //EnseignantEntity enseignant = em.find(EnseignantEntity.class, enseignantOutput.getIdEnseignant());
+            // enseignant.setNom(enseignantOutput.getNom());
+            // enseignant.setPrenom(enseignantOutput.getPrenom());
+            // enseignant.setAdresse(enseignantOutput.getAdresse());
+            // enseignant.setStatut(enseignantOutput.getStatut());
+            // enseignant.setDepartement(enseignantOutput.getDepartement());
+            // enseignant.setLaboratoire(enseignantOutput.getLaboratoire());
+            //enseignant.setTelephone(enseignantOutput.getTelephone());
+            //enseignant.setEmail(enseignantOutput.getEmail());
+            //enseignant.setSiteWeb(enseignantOutput.getSiteWeb());
             em.merge(enseignantOutput);
             em.getTransaction().commit();
             return true;
